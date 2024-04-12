@@ -1,0 +1,82 @@
+<div class="form-wrapper">
+    <form [formGroup]="registerForm" class="my-form">
+        <div class="login-welcome-row">
+            <h1>Create Your Acount</h1>
+        </div>
+        <div class="socials-row">
+            <a href="#" title="Use Google">
+                <img src="../../assets/icons8-google.svg"/>
+                Sign Up With Google
+            </a>
+            <a href="#" title="Use Facebook">
+                <img src="../../assets/icons8-facebook.svg"/>
+                Sign Up With Facebook
+            </a>
+        </div>
+        <div class="devider">
+            <span class="devider-line"></span>
+            Or
+            <span class="devider-line"></span>
+        </div>
+        <div class="text-feild">
+            <label for="name">Name:
+                <input type="text" formControlName="name" id="name" name="name" autocomplete="off" placeholder="Your Name" required/>
+            </label>
+        </div>
+        <div class="text-feild">
+            <label for="last_name">Last Name:
+                <input type="text" formControlName="lastName" id="last_name" name="last_name" autocomplete="off" placeholder="Your Last Name" required/>
+            </label>
+        </div>
+        <div class="text-feild">
+            <label for="email">Email:
+                <input type="email" formControlName="email" id="email" name="email" autocomplete="off" placeholder="Your Email" required/>
+            </label>
+        </div>
+        <div class="text-feild">
+            <label for="number">Number:
+                <input type="number" formControlName="number" id="number" name="number" autocomplete="off" placeholder="Your Number" required/>
+            </label>
+        </div>
+        <div class="text-feild">
+            <label for="dob">Date Of Birth:
+                <input type="date" formControlName="dob" id="dob" name="dob" autocomplete="off"  required/>
+            </label>
+        </div>
+        <div class="text-feild">
+            <label for="adress">Address:
+                <input type="text" formControlName="adress" id="adress" name="adress" autocomplete="off"  required/>
+            </label>
+        </div>
+        <div class="text-feild">
+            <label for="password">Password:
+                <input type="password" formControlName="password" id="password" name="password"  placeholder="Your Password" 
+                title="Minimum 6 characters at least 1 Alphabet and 1 Number" required/>
+            </label>
+        </div>
+        <div class="text-feild">
+            <label for="confirm-password">Repeat Password:
+                <input type="password" formControlName="confirmPassword" id="confirm-password" name="confirm-password"  placeholder="Repeat Your Password" 
+                title="Minimum 6 characters at least 1 Alphabet and 1 Number" required/>
+            </label>
+        </div>
+        <div class="text-feild">
+            <label for="img">Upload Image:
+                <input type="text" formControlName="img" id="img" name="img"  placeholder="Upload Your Image"  required/>
+            </label>
+        </div>
+        <a href="/"><button type="submit" (click)="register()" class="bn632-hover bn20">Sign Up</button></a>
+        <div class="my-form_actions">
+            <div class="my-form_signup">
+                <a [routerLink]="['/login']" title="Login">
+                    Login
+                </a>
+            </div>
+        </div>
+    </form>
+    <div class="info-side">
+        <img src="https://bootstrapious.com/i/snippets/sn-registeration/illustration.svg"/>
+        <div class="welcome-message">
+        </div>
+    </div>
+</div>

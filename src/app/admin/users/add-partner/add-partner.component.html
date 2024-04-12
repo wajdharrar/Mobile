@@ -1,0 +1,165 @@
+<section class="get-in-touch">
+    <div class="title">
+         <h1>Add partner</h1>
+     </div>
+     <div class="devider">
+        <span class="devider-line"></span>
+        Company 
+        <span class="devider-line"></span>
+    </div>
+    <form #addForm="ngForm" class="contact-form row" (ngSubmit)="OnSave()">
+       <div class="form-field col-lg-6">
+          <input id="name" [(ngModel)]="user.name" #name="ngModel" name="name" class="input-text js-input" 
+          type="text" required maxlength="20" pattern="[a-zA-Z]+">
+ 
+          <label class="label" for="name">Company's Name</label>
+ 
+          <div *ngIf="name.invalid && (name.dirty || name.touched)" class="text-danger">
+            <div  *ngIf="name.errors && name.errors['required']">
+              This field is required
+            </div>
+            <div *ngIf="name.errors && name.errors['pattern']">
+              Name must be alphabetical
+            </div>
+          </div>
+       </div>
+        <div class="form-field col-lg-6 ">
+           <input id="email" [(ngModel)]="user.email" #email="ngModel" class="input-text js-input" type="email" 
+           required [ngModelOptions]="{standalone: true}" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}">
+ 
+           <label class="label" for="email">E-mail</label>
+           <div *ngIf="email.invalid && (email.dirty || email.touched)" class="text-danger">
+             <div  *ngIf="email.errors && email.errors['required']">
+               This field is required
+             </div>
+             <div *ngIf="email.errors && email.errors['pattern']">
+               invalid email
+             </div>
+          </div>
+        </div>
+         <div class="form-field col-lg-6 ">
+           <input id="phone" [(ngModel)]="user.number" #number="ngModel" class="input-text js-input" type="text"
+            required [ngModelOptions]="{standalone: true}" pattern="\d+" maxlength="8" minlength="8">
+ 
+           <label class="label" for="phone">Number</label>
+ 
+           <div *ngIf="number.invalid && (number.dirty || number.touched)" class="text-danger">
+             <div  *ngIf="number.errors && number.errors['required']">
+               This field is required
+             </div>
+             <div *ngIf="number.errors && number.errors['pattern']">
+               number must be numerical
+             </div>
+             <div *ngIf="number.errors && number.errors['minlength']">
+                invalid number
+              </div>
+          </div>
+        </div>
+        <div class="form-field col-lg-6 ">
+          <input id="address" [(ngModel)]="user.adress" #address="ngModel" class="input-text js-input" type="text" required [ngModelOptions]="{standalone: true}">
+          <label class="label" for="address" maxlength="255" >Address</label>
+          <div *ngIf="address.invalid && (address.dirty || address.touched)" class="text-danger">
+             <div  *ngIf="address.errors && address.errors['required']">
+               This field is required
+             </div>
+          </div>   
+       </div>
+        <div class="form-field col-lg-6">
+         <input id="password1" [(ngModel)]="password" #password1="ngModel" class="input-text js-input" type="password"  
+         required [ngModelOptions]="{standalone: true}" minlength="8" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$">
+         <label class="label" for="password1">Password</label>
+         {{password}}
+         <div *ngIf="password1.invalid && (password1.dirty || password1.touched)" class="text-danger">
+          <div  *ngIf="password1.errors && password1.errors['required']">
+            This field is required
+          </div>
+          <div *ngIf="password1.errors && password1.errors['pattern']">
+            password must contain at least 1 lowercase letter and 1 uppercase letter
+          </div>
+          <div *ngIf="password1.errors && password1.errors['minlength']">
+             password must contain at least 8 characters
+           </div>
+       </div>
+      </div>
+      <div class="form-field col-lg-6">
+         <input id="password2" [(ngModel)]="password2" class="input-text js-input" type="password"  required [ngModelOptions]="{standalone: true}">
+         <label class="label" for="password2">Confirm Password</label>
+         {{password2}}
+      </div>
+        <div class="form-field col-lg-12">
+          <input id="img" [(ngModel)]="user.img" class="input-text js-input" type="text" required [ngModelOptions]="{standalone: true}">
+          <label class="label" for="img" maxlength="2550">Logo</label>
+       </div>
+       <br>
+     <div class="devider">
+        <span class="devider-line"></span>
+        Manager
+        <span class="devider-line"></span>
+    </div>
+    <br>
+    <div class="form-field col-lg-6">
+        <input id="nameManger" [(ngModel)]="manager.nameRes" #nameManger="ngModel" name="nameManger" class="input-text js-input" 
+        type="text" required maxlength="20" pattern="[a-zA-Z]+">
+
+        <label class="label" for="nameManger">Name</label>
+
+        <div *ngIf="nameManger.invalid && (nameManger.dirty || nameManger.touched)" class="text-danger">
+          <div  *ngIf="nameManger.errors && nameManger.errors['required']">
+            This field is required
+          </div>
+          <div *ngIf="nameManger.errors && nameManger.errors['pattern']">
+            Name must be alphabetical
+          </div>
+        </div>
+     </div>
+     <div class="form-field col-lg-6">
+
+       <input id="lastNameManager" [(ngModel)]="manager.lastNameRes" #lastNameManager="ngModel" class="input-text js-input" 
+       type="text"  maxlength="20" pattern="[a-zA-Z ]+" required [ngModelOptions]="{standalone: true}">
+
+       <label class="label" for="lastNameManager">Last Name</label>
+
+       <div *ngIf="lastNameManager.invalid && (lastNameManager.dirty || lastNameManager.touched)" class="text-danger">
+          <div  *ngIf="lastNameManager.errors && lastNameManager.errors['required']">
+            This field is required
+          </div>
+          <div *ngIf="lastNameManager.errors && lastNameManager.errors['pattern']">
+            Last name must be alphabetical
+          </div>
+       </div>
+     </div>
+      <div class="form-field col-lg-6 ">
+         <input id="emailManager" [(ngModel)]="manager.emailRes" #emailManager="ngModel" class="input-text js-input" type="email" 
+         required [ngModelOptions]="{standalone: true}" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}">
+
+         <label class="label" for="emailManager">E-mail</label>
+         <div *ngIf="emailManager.invalid && (emailManager.dirty || emailManager.touched)" class="text-danger">
+           <div  *ngIf="emailManager.errors && emailManager.errors['required']">
+             This field is required
+           </div>
+           <div *ngIf="emailManager.errors && emailManager.errors['pattern']">
+             invalid email
+           </div>
+        </div>
+      </div>
+       <div class="form-field col-lg-6 ">
+         <input id="numberManager" [(ngModel)]="manager.numberRes" #numberManager="ngModel" class="input-text js-input" type="text"
+          required [ngModelOptions]="{standalone: true}" pattern="\d+" maxlength="8">
+
+         <label class="label" for="numberManager">Number</label>
+
+         <div *ngIf="numberManager.invalid && (numberManager.dirty || numberManager.touched)" class="text-danger">
+           <div  *ngIf="numberManager.errors && numberManager.errors['required']">
+             This field is required
+           </div>
+           <div *ngIf="numberManager.errors && numberManager.errors['pattern']">
+             invalid number
+           </div>
+        </div>
+      </div>
+      <div class="form-field col-lg-12">
+         <input class="bn13" type="submit" value="Save" [disabled]="addForm.invalid">
+      </div>
+   </form>
+  </section>
+  

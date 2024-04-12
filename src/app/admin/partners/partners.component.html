@@ -1,0 +1,92 @@
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<div class="container" *ngIf="users!==undefined">
+	<div class="title">
+		<h1>Manage Partners</h1>
+	</div>
+	<div class="row btns">
+		<div  class="col-lg-2">
+			<a [routerLink]="'add'" class="bn13">+ Add Partner</a>
+		</div>
+		<div class="col-lg-6 input-wrapper">
+			<input type="search" (ngModelChange)="searchUsers(key.value)" #key ngModel name="key" class="input-search" placeholder="Type to Search...">
+		</div>
+	</div>
+	<div class="row">
+	<div class="col-lg-12">
+		<div class="main-box clearfix">
+			<div class="table-responsive">
+				<table class="table user-list">
+					<thead>
+						<tr>
+							<th class="text-center"><span>User</span></th>
+							<th class="text-center"><span>Status</span></th>
+							<th class="text-center"><span>Email</span></th>
+							<th class="text-center"><span>Action</span></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr *ngFor="let user of users">
+							<td>
+								<img src={{user.img}} alt="">
+								<a href="#" class="user-link">{{user.name}} <span *ngIf="user.role.idRole!=3">{{user.lastName}}</span></a>
+								<span class="user-subhead">{{user.role.nameRole}}</span>
+							</td>
+							<td class="text-center">
+								<span class="label label-default">{{user.stateUser}}</span>
+							</td>
+							<td>
+								<a href="#">{{user.email}}</a>
+							</td>
+							<td style="width: 20%;">
+								<a [routerLink]="'details/' + user.idUtilisateur"  class="table-link">
+									<span class="fa-stack">
+										<i class="fa fa-square fa-stack-2x"></i>
+										<i class="fa fa-search-plus fa-stack-1x fa-inverse"></i>
+									</span>
+								</a>
+								<a [routerLink]="'update/' + user.idUtilisateur" class="table-link">
+									<span class="fa-stack">
+										<i class="fa fa-square fa-stack-2x"></i>
+										<i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
+									</span>
+								</a>
+								<a class="table-link" (click)="onActivate(user.idUtilisateur,user)">
+									<span class="fa-stack">
+										<i class="fa fa-square fa-stack-2x"></i>
+										<i class="fa fa-check fa-stack-1x fa-inverse"></i>
+									</span>
+								</a>
+								<a  class="table-link danger" (click)="onBan(user.idUtilisateur,user)">
+									<span class="fa-stack">
+										<i class="fa fa-square fa-stack-2x"></i>
+										<i class="fa fa-ban fa-stack-1x fa-inverse"></i>
+									</span>
+								</a>
+								<a  class="table-link danger" (click)="onDelete(user.idUtilisateur)">
+									<span class="fa-stack">
+										<i class="fa fa-square fa-stack-2x"></i>
+										<i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
+									</span>
+								</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<ul class="pagination pull-right">
+				<li><a href="#"><i class="fa fa-chevron-left"></i></a></li>
+				<li><a href="#">1</a></li>
+				<li><a href="#">2</a></li>
+				<li><a href="#">3</a></li>
+				<li><a href="#">4</a></li>
+				<li><a href="#">5</a></li>
+				<li><a href="#"><i class="fa fa-chevron-right"></i></a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+</div>
+<div *ngIf="users===undefined" class="alert alert-info" role="alert">
+	<h4 class="alert-heading">No Users !</h4>
+	Users List Is Empty
+</div>

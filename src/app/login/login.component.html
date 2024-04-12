@@ -1,0 +1,50 @@
+<div class="form-wrapper">
+    <form [formGroup]="loginForm" class="my-form">
+        <div class="login-welcome-row">
+            <h1>Welcome Back</h1>
+        </div>
+        <div class="socials-row">
+            <a href="" title="Use Google">
+                <asl-google-signin-button type="icon" size="large">
+                </asl-google-signin-button>
+                Login With Google
+            </a>
+            <a href="#" title="Use Facebook">
+                <img src="../../assets/icons8-facebook.svg"/>
+                Login With Facebook
+            </a>
+        </div>
+        <div class="devider">
+            <span class="devider-line"></span>
+            Or
+            <span class="devider-line"></span>
+        </div>
+        <div class="text-feild">
+            <label for="email">Email:
+                <input type="email" formControlName="email" id="email" name="email" autocomplete="off" placeholder="Your Email" required/>
+            </label>
+        </div>
+        <div class="text-feild">
+            <label for="password">Password:
+                <input type="password" formControlName="password" id="password" name="password"  placeholder="Your Password" 
+                title="Minimum 6 characters at least 1 Alphabet and 1 Number" required/>
+            </label>
+        </div>
+        <a href="/"><button type="submit" (click)="login()" class="bn632-hover bn20">Login</button></a>
+        <div class="my-form_actions">
+            <div class="my-form_row">
+                <span>Did you forget your password ?</span>
+                <a (click)="resetPassword()" title="Reset Password">Reset Password</a>
+            </div>
+            <div class="my-form_signup">
+                <a [routerLink]="['/signup']" title="Login">
+                    Sign Up
+                </a>
+            </div>
+        </div>
+        <br>
+    </form>
+    <div class="info-side-login">
+        <img src="../../assets/loginInfo.svg"/>
+    </div>
+</div>

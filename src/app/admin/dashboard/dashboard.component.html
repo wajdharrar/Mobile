@@ -1,0 +1,36 @@
+<div class="dash-container">
+    <div class="title">
+		<h1>View Analyses</h1>
+	</div>
+    <div class="nb-users">
+        <p>Number of active users</p>
+        <div id="users">{{analytics.metricValue}}</div>
+    </div>
+    
+    <div class="hist">
+        <div class="hist-item">
+            <h5>Number Of Events By Event Name</h5>
+            <div style="width: 400px;">
+                <canvas id="analyticsChart" width="400" height="400"></canvas>
+            </div>
+        </div>
+        <div class="hist-item">
+            <h5>Number Of Events Per Page</h5>
+            <div style="width: 400px;">
+                <canvas id="analyticsChartPage" width="400" height="400"></canvas>
+            </div>
+        </div>
+        <div class="hist-item">
+            <h5>Number Of Sessions Per City</h5>
+            <div style="width: 400px;">
+                <canvas id="analyticsPieChart" width="400" height="400"></canvas>
+            </div>
+        </div>
+        <div class="hist-item">
+            <h5>Number Users that scrolled 90% of the Page</h5>
+            <div style="width: 400px;">
+                <canvas id="analyticsPieScrollChart" width="400" height="400"></canvas>
+            </div>
+        </div>
+    </div>
+</div>

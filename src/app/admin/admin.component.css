@@ -1,0 +1,16 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.container-admin {
+    display: flex;
+  }  
+  .sidebar{
+    width:20%;
+  }
+  .content-admin {
+    width: 80%;
+    flex: 1;
+    padding-left: 1%;
+  }
+  

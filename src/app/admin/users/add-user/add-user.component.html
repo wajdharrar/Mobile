@@ -1,0 +1,122 @@
+<section class="get-in-touch">
+   <div class="title">
+		<h1>Add client</h1>
+	</div>
+   <form #addForm="ngForm" class="contact-form row" (ngSubmit)="OnSave()">
+      <div class="form-field col-lg-6">
+         <input id="name" [(ngModel)]="user.name" #name="ngModel" name="name" class="input-text js-input" 
+         type="text" required maxlength="20" pattern="[a-zA-Z]+">
+
+         <label class="label" for="name">Name</label>
+
+         <div *ngIf="name.invalid && (name.dirty || name.touched)" class="text-danger">
+           <div  *ngIf="name.errors && name.errors['required']">
+             This field is required
+           </div>
+           <div *ngIf="name.errors && name.errors['pattern']">
+             Name must be alphabetical
+           </div>
+         </div>
+      </div>
+      <div class="form-field col-lg-6">
+
+        <input id="lastName" [(ngModel)]="user.lastName" #lastName="ngModel" class="input-text js-input" 
+        type="text"  maxlength="20" pattern="[a-zA-Z]+" required [ngModelOptions]="{standalone: true}">
+
+        <label class="label" for="lastName">Last Name</label>
+
+        <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)" class="text-danger">
+           <div  *ngIf="lastName.errors && lastName.errors['required']">
+             This field is required
+           </div>
+           <div *ngIf="lastName.errors && lastName.errors['pattern']">
+             Last name must be alphabetical
+           </div>
+        </div>
+      </div>
+       <div class="form-field col-lg-6 ">
+          <input id="email" [(ngModel)]="user.email" #email="ngModel" class="input-text js-input" type="email" 
+          required [ngModelOptions]="{standalone: true}" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}">
+
+          <label class="label" for="email">E-mail</label>
+          <div *ngIf="email.invalid && (email.dirty || email.touched)" class="text-danger">
+            <div  *ngIf="email.errors && email.errors['required']">
+              This field is required
+            </div>
+            <div *ngIf="email.errors && email.errors['pattern']">
+              invalid email
+            </div>
+         </div>
+       </div>
+        <div class="form-field col-lg-6 ">
+          <input id="phone" [(ngModel)]="user.number" #number="ngModel" class="input-text js-input" type="text"
+           required [ngModelOptions]="{standalone: true}" pattern="\d+" maxlength="8">
+
+          <label class="label" for="phone">Number</label>
+
+          <div *ngIf="number.invalid && (number.dirty || number.touched)" class="text-danger">
+            <div  *ngIf="number.errors && number.errors['required']">
+              This field is required
+            </div>
+            <div *ngIf="number.errors && number.errors['pattern']">
+              invalid number
+            </div>
+         </div>
+       </div>
+       <div class="form-field col-lg-6 ">
+         <input id="address" [(ngModel)]="user.adress" #address="ngModel" class="input-text js-input" type="text" required [ngModelOptions]="{standalone: true}">
+         <label class="label" for="address" maxlength="255" >Address</label>
+         <div *ngIf="address.invalid && (address.dirty || address.touched)" class="text-danger">
+            <div  *ngIf="address.errors && address.errors['required']">
+              This field is required
+            </div>
+         </div>   
+      </div>
+       <div class="form-field col-lg-6">
+          <input id="dob" [(ngModel)]="user.dob" #dob="ngModel" class="input-text js-input" type="date"  
+          required [ngModelOptions]="{standalone: true}">
+          <label class="label" for="dob">Birthday</label>
+          <div *ngIf="dob.invalid && (dob.dirty || dob.touched)" class="text-danger">
+            <div  *ngIf="dob.errors && dob.errors['required']">
+              This field is required
+            </div>
+         </div>
+       </div>
+       <div class="form-field col-lg-6">
+        <input id="password" [(ngModel)]="password1" #password1="ngModel" class="input-text js-input" type="password"  
+        required [ngModelOptions]="{standalone: true}" minlength="8" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$">
+        <label class="label" for="password">Password</label>
+        <div *ngIf="password1.invalid && (password1.dirty || password1.touched)" class="text-danger">
+         <div  *ngIf="password1.errors && password1.errors['required']">
+           This field is required
+         </div>
+         <div *ngIf="password1.errors && password1.errors['pattern']">
+           password must contain at least 1 lowercase letter and 1 uppercase letter
+         </div>
+         <div *ngIf="password1.errors && password1.errors['minlength']">
+            password must contain at least 8 characters
+          </div>
+      </div>
+     </div>
+     <div class="form-field col-lg-6">
+        <input id="password2" [(ngModel)]="password2" class="input-text js-input" type="password"  required [ngModelOptions]="{standalone: true}">
+        <label class="label" for="password2">Confirm Password</label>
+     </div>
+     <div class="form-field col-lg-8">
+      <label class="label" for="img" maxlength="2550">Image</label>
+        <div class="input-group">
+            <div class="custom-file">
+                <input id="img" [(ngModel)]="user.img" class="custom-file-input" type="file" required [ngModelOptions]="{standalone: true}" placeholder="Choose file">
+                <label class="custom-file-label" for="img">Choose file</label>
+            </div>
+        </div>
+      </div>
+      <div class="form-field col-lg-4">
+        <button class="bn53">Upload</button>
+     </div>
+       <div class="form-field col-lg-12">
+          <input class="bn13" type="submit" value="Save" [disabled]="addForm.invalid">
+       </div>
+    </form>
+ </section>
+ 
