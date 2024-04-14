@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { User } from '../../models/User';
 import { BrandService } from '../../services/brand.service';
 import { Brand } from '../../models/Brand';
+import { State } from '../../enum/State';
 
 @Component({
   selector: 'app-product',
@@ -34,5 +35,47 @@ export class ProductComponent implements OnInit {
   }
   switchTab(tab: string) {
     this.activeTab = tab;
+  }
+  onValidateBrand(id:number,brand:Brand){
+    if(brand.state!==State.Valid){
+      brand.state=State.Valid
+      this.brandService.updateState(id,brand).subscribe(respnse=>{
+        Swal.fire('Valid!', 'Brand has been Validated.', 'success');
+      },(error)=>{
+        Swal.fire('Error!', 'Failed to Validate Brand.', 'error');
+      })
+    }else{
+      Swal.fire('Error!', 'Brand Already Valid.', 'error');
+    }
+  }
+  onRejectBrand(id:number,brand:Brand){
+    if(brand.state!==State.Rejected){
+      brand.state=State.Rejected
+      this.brandService.updateState(id,brand).subscribe(respnse=>{
+        Swal.fire('Rejected!', 'Brand has been Rejected.', 'success');
+      },(error:any)=>{
+        Swal.fire('Error!', 'Failed to Reject Brand.', 'error');
+      })
+    }else{
+      Swal.fire('Error!', 'Brand Already Rejected.', 'error');
+    }
+  }
+  onDeleteeBrand(id:number){
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'You are about to delete this brand. This action cannot be undone.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes',
+      cancelButtonText: 'Cancel'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.brandService.deleteBrand(id).subscribe(response => {
+          Swal.fire('Deleted!', 'User has been deleted.', 'success');
+        }, error => {
+          Swal.fire('Error!', 'Failed to delete user.', 'error');
+        });
+      }
+    });
   }
 }

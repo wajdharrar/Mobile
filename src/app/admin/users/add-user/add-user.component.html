@@ -21,7 +21,7 @@
       <div class="form-field col-lg-6">
 
         <input id="lastName" [(ngModel)]="user.lastName" #lastName="ngModel" class="input-text js-input" 
-        type="text"  maxlength="20" pattern="[a-zA-Z]+" required [ngModelOptions]="{standalone: true}">
+        type="text"  maxlength="20" pattern="[a-zA-Z ]+" required [ngModelOptions]="{standalone: true}">
 
         <label class="label" for="lastName">Last Name</label>
 
@@ -83,7 +83,7 @@
          </div>
        </div>
        <div class="form-field col-lg-6">
-        <input id="password" [(ngModel)]="password1" #password1="ngModel" class="input-text js-input" type="password"  
+        <input id="password" [(ngModel)]="password" #password1="ngModel" class="input-text js-input" type="password"  
         required [ngModelOptions]="{standalone: true}" minlength="8" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$">
         <label class="label" for="password">Password</label>
         <div *ngIf="password1.invalid && (password1.dirty || password1.touched)" class="text-danger">
@@ -97,23 +97,23 @@
             password must contain at least 8 characters
           </div>
       </div>
+      {{password}}
      </div>
      <div class="form-field col-lg-6">
         <input id="password2" [(ngModel)]="password2" class="input-text js-input" type="password"  required [ngModelOptions]="{standalone: true}">
         <label class="label" for="password2">Confirm Password</label>
      </div>
+     {{password2}}
      <div class="form-field col-lg-8">
       <label class="label" for="img" maxlength="2550">Image</label>
         <div class="input-group">
             <div class="custom-file">
-                <input id="img" [(ngModel)]="user.img" class="custom-file-input" type="file" required [ngModelOptions]="{standalone: true}" placeholder="Choose file">
+                <input id="img" [(ngModel)]="user.img" class="custom-file-input" type="file" (change)="onFileSelected($event)" required [ngModelOptions]="{standalone: true}" placeholder="Choose file">
                 <label class="custom-file-label" for="img">Choose file</label>
             </div>
         </div>
       </div>
-      <div class="form-field col-lg-4">
-        <button class="bn53">Upload</button>
-     </div>
+      
        <div class="form-field col-lg-12">
           <input class="bn13" type="submit" value="Save" [disabled]="addForm.invalid">
        </div>

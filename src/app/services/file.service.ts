@@ -1,29 +1,37 @@
-import { HttpClient, HttpEventType } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpEvent, HttpEventType } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map } from 'rxjs/internal/operators/map';
+import { Observable, throwError } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FileService {
-  private apiServerUrl="http://localhost:8080/file"
-  constructor(private http:HttpClient) { }
-  uploadFile(file:File){
-    const formData= new FormData();
-    formData.append("file",file);
-    return this.http.post<number>(`${this.apiServerUrl}/upload`,formData,{
-      observe:"events"
+  private apiServerUrl = "http://localhost:8080/file";
+
+  constructor(private http: HttpClient) { }
+
+  uploadFile(file: File, id: number, type: string): Observable<number> {
+    const formData = new FormData();
+    formData.append("file", file);
+
+    return this.http.post<any>(`${this.apiServerUrl}/upload/${id}/${type}`, formData, {
+      reportProgress: true,
+      observe: "events"
     }).pipe(
-      map(event=>{
-        this.getUploadProgress(event)
+      map((event: HttpEvent<any>) => {
+        if (event.type === HttpEventType.UploadProgress && event.total) {
+          const percentDone = Math.round((event.loaded / event.total) * 100);
+          return percentDone;
+        } else if (event.type === HttpEventType.Response) {
+          return 100;
+        }
+        return 0; 
       }),
-    )
-  }
-  private getUploadProgress(event:any):number|null{
-    if(event.type === HttpEventType.UploadProgress){
-      const percentDone=Math.round((event.loaded/event.total)*100);
-      return percentDone;
-    }
-    return null;
+      catchError((error: HttpErrorResponse) => {
+        console.error('Error uploading file:', error);
+        return throwError(error); 
+      })
+    );
   }
 }

@@ -31,6 +31,17 @@ import { ProfileAdminComponent } from './admin/profile-admin/profile-admin.compo
 import { UpdatePartnerComponent } from './admin/partners/update-partner/update-partner.component';
 import { DetailsPartnerComponent } from './admin/partners/details-partner/details-partner.component';
 import { AddBrandComponent } from './admin/product/add-brand/add-brand.component';
+import { DetailsBrandComponent } from './admin/product/details-brand/details-brand.component';
+import { UpdateBrandComponent } from './admin/product/update-brand/update-brand.component';
+import { AddModelComponent } from './admin/product/add-model/add-model.component';
+import { DetailsModelComponent } from './admin/product/details-model/details-model.component';
+import { UpdateModelComponent } from './admin/product/update-model/update-model.component';
+import { AddVersionComponent } from './admin/product/add-version/add-version.component';
+import { DetailsVersionComponent } from './admin/product/details-version/details-version.component';
+import { UpdateVersionComponent } from './admin/product/update-version/update-version.component';
+import { AuthGuard } from './auth.guard';
+import { AuthProviderGuard } from './auth-provider.guard';
+import { AuthClientGard } from './auth-client.guard';
 
 const routes: Routes = [
   {
@@ -65,6 +76,7 @@ const routes: Routes = [
   {
     path:'admin',
     component:AdminComponent,
+    canActivate: [AuthGuard],
     children:[
       {
         path:'dashboard',
@@ -103,6 +115,37 @@ const routes: Routes = [
         component:AddBrandComponent
       },
       {
+        path:'product/detailsbrand/:id',
+        component:DetailsBrandComponent
+      },
+      {
+        path:'product/updatebrand/:id',
+        component:UpdateBrandComponent
+      },
+      {
+        path:'product/addmodel',
+        component:AddModelComponent
+      },
+      {
+        path:'product/detailsmodel/:id',
+        component:DetailsModelComponent
+      },
+      {
+        path:'product/updatemodel/:id',
+        component:UpdateModelComponent
+      },{
+        path:'product/addversion',
+        component:AddVersionComponent
+      },
+      {
+        path:'product/detailsversion/:id',
+        component:DetailsVersionComponent
+      },
+      {
+        path:'product/updateversion/:id',
+        component:UpdateVersionComponent
+      },
+      {
         path:'partners',
         component:PartnersComponent
       },
@@ -127,6 +170,7 @@ const routes: Routes = [
   {
     path:'client',
     component:ClientComponent,
+    canActivate: [AuthClientGard],
     children:[
       {
         path:'dashboard',
@@ -149,6 +193,7 @@ const routes: Routes = [
   {
     path:'provider',
     component:ProviderComponent,
+    canActivate: [AuthProviderGuard],
     children:[
       {
         path:'dashboard',

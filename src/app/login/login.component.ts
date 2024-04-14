@@ -43,10 +43,13 @@ export class LoginComponent implements OnInit{
       console.log(response);
       localStorage.setItem("token",response.token)
         if(response.idRole==2){
+          this.authServiceBE.setIsLoggedIn(true)
           this.route.navigate(['/admin/dashboard']);
         }else if(response.idRole==1){
+          this.authServiceBE.setIsLoggedInClient(true)
           this.route.navigate(['/client/dashboard']);
         }else{
+          this.authServiceBE.setIsLoggedInProvider(true)
           this.route.navigate(['/provider/dashboard']);
         }
         }else{

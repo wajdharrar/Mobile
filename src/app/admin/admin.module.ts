@@ -17,6 +17,12 @@ import { DetailsPartnerComponent } from './partners/details-partner/details-part
 import { AddBrandComponent } from './product/add-brand/add-brand.component';
 import { UpdateBrandComponent } from './product/update-brand/update-brand.component';
 import { DetailsBrandComponent } from './product/details-brand/details-brand.component';
+import { AddModelComponent } from './product/add-model/add-model.component';
+import { AddVersionComponent } from './product/add-version/add-version.component';
+import { UpdateModelComponent } from './product/update-model/update-model.component';
+import { UpdateVersionComponent } from './product/update-version/update-version.component';
+import { DetailsVersionComponent } from './product/details-version/details-version.component';
+import { DetailsModelComponent } from './product/details-model/details-model.component';
 
 
 
@@ -36,7 +42,13 @@ import { DetailsBrandComponent } from './product/details-brand/details-brand.com
     DetailsPartnerComponent,
     AddBrandComponent,
     UpdateBrandComponent,
-    DetailsBrandComponent
+    DetailsBrandComponent,
+    AddModelComponent,
+    AddVersionComponent,
+    UpdateModelComponent,
+    UpdateVersionComponent,
+    DetailsVersionComponent,
+    DetailsModelComponent
   ],
   imports: [
     CommonModule,
