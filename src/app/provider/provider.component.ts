@@ -16,6 +16,10 @@ export class ProviderComponent implements OnInit{
     this.authService.getUserDetails().subscribe(response=>{
       console.log(response)
       this.user=response
+      if(this.user.role.idRole!=3){
+        this.route.navigate(['/login']);
+        Swal.fire('Error!', 'You Have To Login First.', 'error');
+      }
      },(error)=>{
       console.log(error);
       this.route.navigate(['/login']);

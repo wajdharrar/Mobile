@@ -13,14 +13,11 @@ import { ActivatedRoute, Route, Router } from '@angular/router';
 export class ProfileComponent implements OnInit{
   user!:User;
   constructor(private authService:AuthService,private route:Router){}
- ngOnInit(): void {
-   this.authService.getUserDetails().subscribe(response=>{
+ ngOnInit(): void {  
+  this.authService.getUserDetails().subscribe(response=>{
     console.log(response)
     this.user=response
    },(error)=>{
     console.log(error);
-    this.route.navigate(['/login']);
-    Swal.fire('Error!', 'Session Expired.', 'error');
-   })
- }
+ })}
 }

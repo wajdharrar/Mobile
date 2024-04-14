@@ -43,8 +43,6 @@ export class DetailsPartnerComponent {
     this.user=response
    },(error)=>{
     console.log(error);
-    this.router.navigate(['/login']);
-    Swal.fire('Error!', 'Session Expired.', 'error');
  })
 }
  

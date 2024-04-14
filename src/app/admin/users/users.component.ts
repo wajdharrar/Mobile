@@ -17,13 +17,6 @@ export class UsersComponent implements OnInit {
   constructor(private userService:UserService,private authService:AuthService,private route:Router){}
 
   ngOnInit(): void {
-    this.authService.getUserDetails().subscribe(response=>{
-      console.log(response)
-      this.user=response
-     },(error)=>{
-      console.log(error);
-      this.route.navigate(['/login']);
-      Swal.fire('Error!', 'Session Expired.', 'error');})
     this.getUsers()    
   }
   getUsers(){

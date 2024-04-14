@@ -22,14 +22,7 @@ export class RequestsComponent implements OnInit{
     },(error)=>{
       console.log(error);
     })
-    this.authService.getUserDetails().subscribe(response=>{
-      console.log(response)
-      this.user=response
-     },(error)=>{
-      console.log(error);
-      this.route.navigate(['/login']);
-      Swal.fire('Error!', 'Session Expired.', 'error');
-  })}
+  }
   onValidate(id:number,request:Request){}
   onRefuse(id:number,request:Request){}
   onDelete(id:number){}
