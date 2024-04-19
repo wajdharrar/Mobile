@@ -5,6 +5,7 @@ import { BrandService } from '../../../services/brand.service';
 import Swal from 'sweetalert2';
 import { AuthService } from '../../../services/auth.service';
 import { User } from '../../../models/User';
+import { FileService } from '../../../services/file.service';
 
 @Component({
   selector: 'app-update-brand',
@@ -15,7 +16,9 @@ export class UpdateBrandComponent {
   brandId!:any;
   brand!:Brand;
   user!:User;
-  constructor(private route:ActivatedRoute,private brandService:BrandService,private router:Router,private authService:AuthService){}
+  selectedFile!:File|null;
+  uploadProgress!:number;
+  constructor(private route:ActivatedRoute,private brandService:BrandService,private router:Router,private authService:AuthService,private fileService:FileService){}
   ngOnInit(): void {
     this.route.params.subscribe(param=>{
       this.brandId=param['id'];
@@ -41,6 +44,7 @@ export class UpdateBrandComponent {
         icon: 'success',
         confirmButtonText: 'Ok'
       });
+      this.onUploadFile(response)
     },(error)=>{
       console.log(error);
       Swal.fire({
@@ -52,5 +56,34 @@ export class UpdateBrandComponent {
 
     })
     this.router.navigate(["admin/products"]);
+  }
+  onFileSelected(event:any){
+    const fileList:FileList = event.target.files;
+    if(fileList && fileList.length>0){
+      this.selectedFile=fileList[0];
+    }
+  }
+  onUploadFile(brand:Brand){
+    if(this.selectedFile){
+      this.fileService.uploadFile(this.selectedFile,brand.idBrand,'brand').subscribe((progress)=>{
+        this.uploadProgress===progress
+        if(progress===100){
+          Swal.fire({
+            title:"success !",
+            text:'file uploaded successfuly',
+            icon:'success',
+            confirmButtonText:'ok'
+          })
+          this.selectedFile=null
+        }else{
+          Swal.fire({
+            title:"Error !",
+            text:'failed to upload file',
+            icon:'error',
+            confirmButtonText:'ok'
+          })
+        }
+      })    
+    }
   }
 }

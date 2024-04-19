@@ -68,7 +68,6 @@
          <input id="password1" [(ngModel)]="password" #password1="ngModel" class="input-text js-input" type="password"  
          required [ngModelOptions]="{standalone: true}" minlength="8" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$">
          <label class="label" for="password1">Password</label>
-         {{password}}
          <div *ngIf="password1.invalid && (password1.dirty || password1.touched)" class="text-danger">
           <div  *ngIf="password1.errors && password1.errors['required']">
             This field is required
@@ -84,12 +83,11 @@
       <div class="form-field col-lg-6">
          <input id="password2" [(ngModel)]="password2" class="input-text js-input" type="password"  required [ngModelOptions]="{standalone: true}">
          <label class="label" for="password2">Confirm Password</label>
-         {{password2}}
       </div>
-        <div class="form-field col-lg-12">
-          <input id="img" [(ngModel)]="user.img" class="input-text js-input" type="text" required [ngModelOptions]="{standalone: true}">
-          <label class="label" for="img" maxlength="2550">Logo</label>
-       </div>
+      <div class="form-field col-lg-12">
+        <label class="label" for="img" maxlength="2550">Image</label>
+        <input id="img" [(ngModel)]="user.img" class="form-control form-control-lg" type="file" (change)="onFileSelected($event)" required [ngModelOptions]="{standalone: true}" placeholder="Choose file">
+        </div>
        <br>
      <div class="devider">
         <span class="devider-line"></span>
@@ -158,8 +156,8 @@
         </div>
       </div>
       <div class="form-field col-lg-12">
-         <input class="bn13" type="submit" value="Save" [disabled]="addForm.invalid">
-      </div>
+        <input class="submit-btn" type="submit" value="Save Changes">
+     </div>
    </form>
   </section>
   

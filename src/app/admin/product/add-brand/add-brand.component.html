@@ -31,18 +31,10 @@
             </div>
          </div>
        </div>
-       <div class="form-field col-lg-8">
+       <div class="form-field col-lg-12">
         <label class="label" for="img" maxlength="2550">Logo</label>
-          <div class="input-group">
-              <div class="custom-file">
-                  <input id="img" [(ngModel)]="brand.logoBrand" class="custom-file-input" type="file" required [ngModelOptions]="{standalone: true}" placeholder="Choose file">
-                  <label class="custom-file-label" for="img">Choose file</label>
-              </div>
-          </div>
+        <input id="img" [(ngModel)]="brand.logoBrand" class="form-control form-control-lg" type="file" (change)="onFileSelected($event)" required [ngModelOptions]="{standalone: true}" placeholder="Choose file">
         </div>
-        <div class="form-field col-lg-4">
-          <button class="bn53">Upload</button>
-       </div>
         <div class="form-field col-lg-12">
            <input class="bn13" type="submit" value="Save" [disabled]="addForm.invalid">
         </div>

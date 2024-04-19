@@ -24,15 +24,7 @@ export class LoginComponent implements OnInit{
   user!: SocialUser;
   loggedIn!: boolean;
   ngOnInit() {
-    this.googleAuthService.clearAccessToken()
-    this.authService.authState.subscribe((user) => {
-      this.user = user;
-      this.loggedIn = (user != null);
-      console.log(this.user.idToken)
-      console.log(this.user)
-      localStorage.setItem("access_token",this.user.idToken)
-      this.router.navigate(['/dashboard']);
-    });
+    localStorage.removeItem("token")
   }
   signOut(): void {
     this.authService.signOut();

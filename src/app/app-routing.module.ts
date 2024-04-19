@@ -39,6 +39,7 @@ import { UpdateModelComponent } from './admin/product/update-model/update-model.
 import { AddVersionComponent } from './admin/product/add-version/add-version.component';
 import { DetailsVersionComponent } from './admin/product/details-version/details-version.component';
 import { UpdateVersionComponent } from './admin/product/update-version/update-version.component';
+import { DevicesComponent } from './admin/devices/devices.component';
 
 const routes: Routes = [
   {
@@ -161,6 +162,10 @@ const routes: Routes = [
       {
         path:'partners/add',
         component:AddPartnerComponent,
+      },
+      {
+        path:'device',
+        component:DevicesComponent,
       },
     ]
   },

@@ -1,1 +1,49 @@
-<p>add-model works!</p>
+<section class="get-in-touch">
+    <div class="title">
+         <h1>Add Model</h1>
+     </div>
+    <form #addForm="ngForm" class="contact-form row" (ngSubmit)="OnSave()">
+        <div class="form-field col-lg-6">
+            <div class="select">
+                <select>
+                <option value="1">Americano</option>
+                <option value="2">Latte</option>
+                <option value="3">Green Tea</option>
+                </select>
+            </div>
+        </div>
+       <div class="form-field col-lg-6">
+          <input id="name" [(ngModel)]="model.nameModel" #name="ngModel" name="name" class="input-text js-input" 
+          type="text" required maxlength="50">
+ 
+          <label class="label" for="name">Name</label>
+ 
+          <div *ngIf="name.invalid && (name.dirty || name.touched)" class="text-danger">
+            <div  *ngIf="name.errors && name.errors['required']">
+              This field is required
+            </div>
+          </div>
+       </div>
+       <div class="form-field col-lg-6">
+ 
+         <input id="descBrand" [(ngModel)]="model.descModel" #descBrand="ngModel" class="input-text js-input" 
+         type="text"  maxlength="255" required [ngModelOptions]="{standalone: true}">
+ 
+         <label class="label" for="descBrand">Description</label>
+ 
+         <div *ngIf="descBrand.invalid && (descBrand.dirty || descBrand.touched)" class="text-danger">
+            <div  *ngIf="descBrand.errors && descBrand.errors['required']">
+              This field is required
+            </div>
+         </div>
+       </div>
+       <div class="form-field col-lg-12">
+        <label class="label" for="img" maxlength="2550">Image</label>
+        <input id="img" [(ngModel)]="model.imgModel" class="form-control form-control-lg" type="file" (change)="onFileSelected($event)" required [ngModelOptions]="{standalone: true}" placeholder="Choose file">
+        </div>
+        <div class="form-field col-lg-12">
+           <input class="bn13" type="submit" value="Save" [disabled]="addForm.invalid">
+        </div>
+     </form>
+  </section>
+  

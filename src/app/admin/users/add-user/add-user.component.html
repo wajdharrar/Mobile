@@ -97,26 +97,18 @@
             password must contain at least 8 characters
           </div>
       </div>
-      {{password}}
      </div>
      <div class="form-field col-lg-6">
         <input id="password2" [(ngModel)]="password2" class="input-text js-input" type="password"  required [ngModelOptions]="{standalone: true}">
         <label class="label" for="password2">Confirm Password</label>
      </div>
-     {{password2}}
-     <div class="form-field col-lg-8">
+     <div class="form-field col-lg-12">
       <label class="label" for="img" maxlength="2550">Image</label>
-        <div class="input-group">
-            <div class="custom-file">
-                <input id="img" [(ngModel)]="user.img" class="custom-file-input" type="file" (change)="onFileSelected($event)" required [ngModelOptions]="{standalone: true}" placeholder="Choose file">
-                <label class="custom-file-label" for="img">Choose file</label>
-            </div>
-        </div>
+      <input id="img" [(ngModel)]="user.img" class="form-control form-control-lg" type="file" (change)="onFileSelected($event)" required [ngModelOptions]="{standalone: true}" placeholder="Choose file">
       </div>
-      
-       <div class="form-field col-lg-12">
-          <input class="bn13" type="submit" value="Save" [disabled]="addForm.invalid">
-       </div>
+      <div class="form-field col-lg-12">
+        <input class="submit-btn" type="submit" value="Save Changes">
+     </div>
     </form>
  </section>
  

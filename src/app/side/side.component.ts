@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrl: './side.component.css'
 })
 export class SideComponent {
+  isDropdownOpen = false;
 
+  toggleDropdown() {
+    this.isDropdownOpen = !this.isDropdownOpen;
+  }
 }

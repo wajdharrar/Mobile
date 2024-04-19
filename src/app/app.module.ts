@@ -22,6 +22,7 @@ import { PasswordComponent } from './password/password.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { ClientModuleModule } from './client/client-module.module';
 import { ProviderModuleModule } from './provider/provider-module.module';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,7 @@ import { ProviderModuleModule } from './provider/provider-module.module';
     FormsModule,
     AppRoutingModule,
     SocialLoginModule,
-    GoogleSigninButtonModule
+    GoogleSigninButtonModule,
   ],
   providers: [
     {
@@ -61,10 +62,9 @@ import { ProviderModuleModule } from './provider/provider-module.module';
         providers: [
           {
             id: GoogleLoginProvider.PROVIDER_ID,
-            provider: new GoogleLoginProvider(
-              '418103189835-v0gvqeoo46ta2i9ok2elp1g2ea1jfdbd.apps.googleusercontent.com',{
-                scopes: 'https://www.googleapis.com/auth/analytics.readonly	'}
-            )
+            provider: new GoogleLoginProvider('418103189835-v0gvqeoo46ta2i9ok2elp1g2ea1jfdbd.apps.googleusercontent.com', {
+              scopes: 'https://www.googleapis.com/auth/analytics.readonly	'
+            })
           },
           {
             id: FacebookLoginProvider.PROVIDER_ID,
@@ -75,8 +75,10 @@ import { ProviderModuleModule } from './provider/provider-module.module';
           console.error(err);
         }
       } as SocialAuthServiceConfig,
-    }
+    },
+    provideAnimationsAsync()
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

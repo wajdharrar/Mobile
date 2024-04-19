@@ -23,6 +23,7 @@ import { UpdateModelComponent } from './product/update-model/update-model.compon
 import { UpdateVersionComponent } from './product/update-version/update-version.component';
 import { DetailsVersionComponent } from './product/details-version/details-version.component';
 import { DetailsModelComponent } from './product/details-model/details-model.component';
+import { DevicesComponent } from './devices/devices.component';
 
 
 
@@ -48,7 +49,8 @@ import { DetailsModelComponent } from './product/details-model/details-model.com
     UpdateModelComponent,
     UpdateVersionComponent,
     DetailsVersionComponent,
-    DetailsModelComponent
+    DetailsModelComponent,
+    DevicesComponent
   ],
   imports: [
     CommonModule,

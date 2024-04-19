@@ -19,7 +19,10 @@ export class DashboardComponent implements OnInit {
   scroll!:AnalyticsData[];
 
   constructor(private googleAnalyticsService: GoogleAnalyticsService, private analyticsService: AnalyticsService) { }
-
+  activeTab: string='global';
+  switchTab(tab: string) {
+    this.activeTab = tab;
+  }
   ngOnInit(): void {
     this.analyticsService.getUsers().subscribe(response => {
       console.log(response);

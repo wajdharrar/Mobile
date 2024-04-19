@@ -6,7 +6,7 @@
                     <img src="{{user.img}}" alt=""/>
                     <div class="file btn btn-lg btn-primary">
                         Change Photo
-                        <input type="file" name="file"/>
+                        <input type="file" name="file" (change)="onFileSelected($event)"/>
                     </div>
                 </div>
             </div>
