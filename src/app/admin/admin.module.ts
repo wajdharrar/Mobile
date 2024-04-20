@@ -24,6 +24,7 @@ import { UpdateVersionComponent } from './product/update-version/update-version.
 import { DetailsVersionComponent } from './product/details-version/details-version.component';
 import { DetailsModelComponent } from './product/details-model/details-model.component';
 import { DevicesComponent } from './devices/devices.component';
+import { UpdateProfileAdminComponent } from './profile-admin/update-profile-admin/update-profile-admin.component';
 
 
 
@@ -50,7 +51,8 @@ import { DevicesComponent } from './devices/devices.component';
     UpdateVersionComponent,
     DetailsVersionComponent,
     DetailsModelComponent,
-    DevicesComponent
+    DevicesComponent,
+    UpdateProfileAdminComponent
   ],
   imports: [
     CommonModule,

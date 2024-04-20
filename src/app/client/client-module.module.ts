@@ -14,7 +14,7 @@ import { UpdateProfileComponent } from './profile/update-profile/update-profile.
     ClientDashboardComponent,
     ProfileComponent,
     MyRequestsComponent,
-    UpdateProfileComponent
+    UpdateProfileComponent,
   ],
   imports: [
     CommonModule,

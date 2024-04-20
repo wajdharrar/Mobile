@@ -40,6 +40,8 @@ import { AddVersionComponent } from './admin/product/add-version/add-version.com
 import { DetailsVersionComponent } from './admin/product/details-version/details-version.component';
 import { UpdateVersionComponent } from './admin/product/update-version/update-version.component';
 import { DevicesComponent } from './admin/devices/devices.component';
+import { UpdateProfileAdminComponent } from './admin/profile-admin/update-profile-admin/update-profile-admin.component';
+import { UpdateProfileProviderComponent } from './provider/provider-profile/update-profile-provider/update-profile-provider.component';
 
 const routes: Routes = [
   {
@@ -152,6 +154,10 @@ const routes: Routes = [
         component:ProfileAdminComponent,
       },
       {
+        path:'profile/update/:id',
+        component:UpdateProfileAdminComponent,
+      },
+      {
         path:'partners/details/:id',
         component:DetailsPartnerComponent,
       },
@@ -206,6 +212,10 @@ const routes: Routes = [
       {
         path:'profile',
         component:ProviderProfileComponent,
+      },
+      {
+        path:'profile/update/:id',
+        component:UpdateProfileProviderComponent,
       },
       {
         path:'requests',

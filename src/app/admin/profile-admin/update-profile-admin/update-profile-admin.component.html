@@ -1,0 +1,36 @@
+<section class="get-in-touch">
+    <form #updateForm="ngForm" class="contact-form row" (ngSubmit)="OnSave()">
+       <div class="form-field col-lg-6">
+          <input id="name" [(ngModel)]="user.name" class="input-text js-input" type="text" required [ngModelOptions]="{standalone: true}">
+          <label class="label" for="name">Name</label>
+       </div>
+       <div class="form-field col-lg-6">
+         <input id="lastName" [(ngModel)]="user.lastName" class="input-text js-input" type="text" required [ngModelOptions]="{standalone: true}">
+         <label class="label" for="lastName">Last Name</label>
+      </div>
+       <div class="form-field col-lg-6 ">
+          <input id="email" [(ngModel)]="user.email" class="input-text js-input" type="email" required [ngModelOptions]="{standalone: true}">
+          <label class="label" for="email">E-mail</label>
+       </div>
+        <div class="form-field col-lg-6 ">
+          <input id="phone" [(ngModel)]="user.number" class="input-text js-input" type="number" required [ngModelOptions]="{standalone: true}">
+          <label class="label" for="phone">Number</label>
+       </div>
+       <div class="form-field col-lg-6 ">
+         <input id="address" [(ngModel)]="user.adress" class="input-text js-input" type="text" required [ngModelOptions]="{standalone: true}">
+         <label class="label" for="address">Address</label>
+      </div>
+       <div class="form-field col-lg-6">
+          <input id="dob" [(ngModel)]="user.dob" class="input-text js-input" type="date" placeholder="" required [ngModelOptions]="{standalone: true}">
+          <label class="label" for="dob">Birthday</label>
+       </div>
+       <div class="form-field col-lg-12">
+        <label class="label" for="img" maxlength="2550">Image</label>
+        <input id="img" [(ngModel)]="user.img" class="form-control form-control-lg" type="file" (change)="onFileSelected($event)" required [ngModelOptions]="{standalone: true}" placeholder="Choose file">
+        </div>
+       <div class="form-field col-lg-12">
+          <input class="submit-btn" type="submit" value="Save Changes">
+       </div>
+    </form>
+ </section>
+ 

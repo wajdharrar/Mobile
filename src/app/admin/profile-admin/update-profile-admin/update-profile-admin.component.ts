@@ -1,16 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { UserService } from '../../../services/user.service';
-import { User } from '../../../models/User';
 import Swal from 'sweetalert2';
+import { User } from '../../../models/User';
+import { UserService } from '../../../services/user.service';
 import { FileService } from '../../../services/file.service';
 
 @Component({
-  selector: 'app-update-profile',
-  templateUrl: './update-profile.component.html',
-  styleUrl: './update-profile.component.css'
+  selector: 'app-update-profile-admin',
+  templateUrl: './update-profile-admin.component.html',
+  styleUrl: './update-profile-admin.component.css'
 })
-export class UpdateProfileComponent {
+export class UpdateProfileAdminComponent implements OnInit {
   userId!:any;
   user!:User;
   selectedFile!:File|null;
@@ -45,7 +45,7 @@ export class UpdateProfileComponent {
       });
 
     })
-    this.router.navigate(["client/profile"]);
+    this.router.navigate(["admin/profile"]);
   }
   onFileSelected(event:any){
     const fileList:FileList = event.target.files;
