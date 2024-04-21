@@ -91,10 +91,10 @@
            This field is required
          </div>
          <div *ngIf="password1.errors && password1.errors['pattern']">
-           password must contain at least 1 lowercase letter and 1 uppercase letter
-         </div>
+            <small>at least 1 uppercase and 1 Number</small>          
+          </div>
          <div *ngIf="password1.errors && password1.errors['minlength']">
-            password must contain at least 8 characters
+            <small>at least 8 characters</small>  
           </div>
       </div>
      </div>

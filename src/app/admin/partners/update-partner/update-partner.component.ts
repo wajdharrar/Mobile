@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
-import { StateUser } from '../../../enum/StateUser';
 import { User } from '../../../models/User';
 import { AuthService } from '../../../services/auth.service';
 import { ProviderService } from '../../../services/provider.service';
 import { UserService } from '../../../services/user.service';
 import { Partner } from '../../../models/Partner';
+import { FileService } from '../../../services/file.service';
 
 @Component({
   selector: 'app-update-partner',
@@ -18,12 +18,15 @@ export class UpdatePartnerComponent {
   user!:User
   company!:User
   manager!:Partner
+  selectedFile!:File|null;
+  uploadProgress!:number;
   constructor(
     private authService: AuthService,
     private userService:UserService,
     private route:ActivatedRoute,
     private router: Router,
-    private partnerService: ProviderService
+    private partnerService: ProviderService,
+    private fileService:FileService
   ) { }
   ngOnInit(){
     this.route.params.subscribe(param=>{
@@ -39,14 +42,6 @@ export class UpdatePartnerComponent {
         console.log(error);
        })
     })
-    this.authService.getUserDetails().subscribe(response=>{
-      console.log(response)
-      this.user=response
-     },(error)=>{
-      console.log(error);
-      this.router.navigate(['/login']);
-      Swal.fire('Error!', 'Session Expired.', 'error');
-     })
     }
   OnSave(): void {
       console.log(this.user);
@@ -54,6 +49,7 @@ export class UpdatePartnerComponent {
         (response) => {
           this.company=response;
           console.log(response, 'company details updated');
+          this.onUploadFile(response)
           this.updateManager();
         },
         (error) => {
@@ -94,5 +90,34 @@ export class UpdatePartnerComponent {
       icon: 'error',
       confirmButtonText: 'Ok'
     });
+  }
+  onFileSelected(event:any){
+    const fileList:FileList = event.target.files;
+    if(fileList && fileList.length>0){
+      this.selectedFile=fileList[0];
+    }
+  }
+  onUploadFile(user:User){
+    if(this.selectedFile){
+      this.fileService.uploadFile(this.selectedFile,user.idUtilisateur,'user').subscribe((progress)=>{
+        this.uploadProgress===progress
+        if(progress===100){
+          Swal.fire({
+            title:"success !",
+            text:'file uploaded successfuly',
+            icon:'success',
+            confirmButtonText:'ok'
+          })
+          this.selectedFile=null
+        }else{
+          Swal.fire({
+            title:"Error !",
+            text:'failed to upload file',
+            icon:'error',
+            confirmButtonText:'ok'
+          })
+        }
+      })    
+    }
   }
 }

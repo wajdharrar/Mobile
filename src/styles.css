@@ -60,7 +60,7 @@ body{
   position: relative;
   box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.5); /* Shadow effect */
   margin-left: 20%;
-  margin-top: 5%;
+  margin-top: 1%;
   width: 60%;
   display: flex;
 }

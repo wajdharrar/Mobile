@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-sign-up',
@@ -36,9 +37,19 @@ export class SignUpComponent {
       this.authService.Register(this.registerForm.value).subscribe(response=>{
         console.log(response)
         this.route.navigate(['/login'])
+      },error=>{
+        Swal.fire({
+          title:'Error !',
+          text:'email already exists',
+          icon:'error'
+        })
       })
     }else{
-      console.log("7il 3inik")
+      Swal.fire({
+        title:'Error !',
+        text:'Check your password',
+        icon:'error'
+      })
     }
   }
 

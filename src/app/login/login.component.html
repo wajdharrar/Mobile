@@ -5,23 +5,41 @@
         </div>    
         <div class="text-feild">
             <label for="email">Email:
-                <input type="email" formControlName="email" id="email" name="email" autocomplete="off" placeholder="Your Email" required/>
+                <input type="email" formControlName="email" id="email" name="email" autocomplete="off" placeholder="Your Email" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"  required/>
             </label>
+            <div *ngIf="loginForm.get('email')?.invalid && (loginForm.get('email')?.dirty || loginForm.get('email')?.touched)" class="text-danger">
+                <div  *ngIf="loginForm.get('email')?.errors && loginForm.get('email')?.errors['required']">
+                  <small>This field is required</small>
+                </div>
+                <div *ngIf="loginForm.get('email')?.errors && loginForm.get('email')?.errors['pattern']">
+                  <small>invalid email</small>
+                </div>
+              </div>
         </div>
         <div class="text-feild">
             <label for="password">Password:
-                <input type="password" formControlName="password" id="password" name="password"  placeholder="Your Password" 
-                title="Minimum 6 characters at least 1 Alphabet and 1 Number" required/>
+                <input type="password" formControlName="password" id="password" name="password"  placeholder="Your Password" minlength="8" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$" required/>
             </label>
+            <div *ngIf="loginForm.get('password').invalid && (loginForm.get('password').dirty || loginForm.get('password').touched)" class="text-danger">
+                <div  *ngIf="loginForm.get('password').errors && loginForm.get('password').errors['required']">
+                  This field is required
+                </div>
+                <div *ngIf="loginForm.get('password').errors && loginForm.get('password').errors['pattern']">
+                   <small>at least 1 uppercase and 1 Number</small>          
+                 </div>
+                <div *ngIf="loginForm.get('password').errors && loginForm.get('password').errors['minlength']">
+                   <small>at least 8 characters</small>  
+                 </div>
+             </div>
         </div>
         <a href="/"><button type="submit" (click)="login()" class="bn632-hover bn20">Login</button></a>
         <div class="my-form_actions">
             <div class="my-form_row">
                 <span>Did you forget your password ?</span>
-                <a (click)="resetPassword()" title="Reset Password">Reset Password</a>
+                <a (click)="resetPassword()">Reset Password</a>
             </div>
             <div class="my-form_signup">
-                <a [routerLink]="['/signup']" title="Login">
+                <a [routerLink]="['/signup']">
                     Sign Up
                 </a>
             </div>

@@ -65,9 +65,9 @@
           </div>   
         </div>
         <div class="form-field col-lg-12">
-          <input id="img" [(ngModel)]="user.img" class="input-text js-input" type="text" required [ngModelOptions]="{standalone: true}">
           <label class="label" for="img" maxlength="2550">Logo</label>
-       </div>
+          <input id="img" [(ngModel)]="user.img" class="form-control form-control-lg" type="file" (change)="onFileSelected($event)" required [ngModelOptions]="{standalone: true}" placeholder="Choose file">
+          </div>
        <br>
      <div class="devider">
         <span class="devider-line"></span>
