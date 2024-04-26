@@ -19,14 +19,14 @@ export class AddUserComponent implements OnInit {
     name:'',
     lastName:'',
     number:'',
-    password:'',
+    mdp:'',
     email:'',
     adress:'',
     dob:'',
     img:'',
     stateUser:StateUser.ACTIVE,
     role:{
-      idRole:1,
+      idRole:3,
       nameRole:"user"
     }
   }
@@ -49,7 +49,7 @@ export class AddUserComponent implements OnInit {
   })}
   OnSave(){
     if(this.password==this.password2){
-      this.user.password=this.password;
+      this.user.mdp=this.password;
       console.log(this.user);
       this.authService.Register(this.user).subscribe(response=>{
         console.log(response,"token");

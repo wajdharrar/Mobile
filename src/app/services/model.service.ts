@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Model } from '../models/Model';
+import { Brand } from '../models/Brand';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class ModelService {
   getModels(): Observable<Model[]> {
     return this.http.get<Model[]>(`${this.apiServerUrl}/all`);
   }
-  getModel(id:number): Observable<Model> {
+  getModel(id:number): Observable<any> {
     return this.http.get<Model>(`${this.apiServerUrl}/${id}`);
   }
   addModel(model:any):Observable<Model>{
@@ -26,5 +27,8 @@ export class ModelService {
   }
   updateState(id: number, model: Model): Observable<Model> {
     return this.http.put<Model>(`${this.apiServerUrl}/updatestate/${id}`, model);
+  }
+  getModelsBybrand(barnd: Brand): Observable<Model[]>{
+    return this.http.post<Model[]>(`${this.apiServerUrl}/brand`, barnd);
   }
 }

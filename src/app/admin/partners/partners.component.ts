@@ -13,19 +13,9 @@ import { Router } from '@angular/router';
 })
 export class PartnersComponent {
   users!:User[];
-  user!:User;
   constructor(private authService:AuthService,private route:Router,private userService:UserService){}
   ngOnInit(): void {
-    this.authService.getUserDetails().subscribe(response=>{
-      console.log(response)
-      this.user=response
-     },(error)=>{
-      console.log(error);
-      this.route.navigate(['/login']);
-      Swal.fire('Error!', 'Session Expired.', 'error');
-     })
      this.getUsers()    
-
   }
 
   getUsers(){

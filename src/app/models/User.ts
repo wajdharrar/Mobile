@@ -1,6 +1,6 @@
 import { StateUser } from "../enum/StateUser";
 import { Role } from "./Role";
-import { Phone } from "./Phone";
+import { Device } from "./Phone";
 
 
 export interface User{
@@ -16,5 +16,5 @@ export interface User{
     stateUser:StateUser;
     role:Role;
     requests:Request[];
-    phones:Phone[];
+    phones:Device[];
 }

@@ -14,8 +14,8 @@ export class SignUpComponent {
   role:any;
   constructor(private authService:AuthService ,private fb:FormBuilder,private route:Router){
     this.role={
-      idRole: 1,
-      nameRole:"user"
+      idRole: 3,
+      nameRole:"client"
     }
     this.registerForm = this.fb.group({
       name: ['', Validators.required],
@@ -24,8 +24,8 @@ export class SignUpComponent {
       number: ['', [Validators.required, Validators.email]],
       dob: ['', [Validators.required, Validators.email]],
       adress: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
-      confirmPassword: ['', [Validators.required, Validators.minLength(6)]],
+      mdp: ['', [Validators.required, Validators.minLength(6)]],
+      confirmmdp: ['', [Validators.required, Validators.minLength(6)]],
       img: ['', Validators.required],
       stateUser: ['Active', Validators.required],
       role:[this.role, Validators.required]
@@ -33,7 +33,10 @@ export class SignUpComponent {
     });
   }
   register(){
-    if(this.registerForm.get('password')?.value===this.registerForm.get('confirmPassword')?.value){
+    console.log(this.registerForm.get('mdp')?.value);
+      console.log(this.registerForm.get('confirmmdp')?.value);
+    if(this.registerForm.get('mdp')?.value===this.registerForm.get('confirmmdp')?.value){
+      console.log(this.registerForm.value);
       this.authService.Register(this.registerForm.value).subscribe(response=>{
         console.log(response)
         this.route.navigate(['/login'])

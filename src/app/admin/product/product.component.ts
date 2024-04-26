@@ -6,6 +6,10 @@ import { User } from '../../models/User';
 import { BrandService } from '../../services/brand.service';
 import { Brand } from '../../models/Brand';
 import { State } from '../../enum/State';
+import { ModelService } from '../../services/model.service';
+import { Model } from '../../models/Model';
+import { VersionService } from '../../services/version.service';
+import { Version } from '../../models/Version';
 
 @Component({
   selector: 'app-product',
@@ -15,23 +19,37 @@ import { State } from '../../enum/State';
 export class ProductComponent implements OnInit {
   user!:User;
   brands!:Brand[];
+  models!:Model[];
+  versions!:Version[];
+  lengthBrands!:number;
   activeTab: string = 'brand';
-  constructor(private authService:AuthService,private route:Router,private brandService:BrandService){}
+  constructor(private authService:AuthService,
+              private route:Router,
+              private brandService:BrandService,
+              private versionService:VersionService,
+              private modelService:ModelService){}
   ngOnInit(): void {
-    this.authService.getUserDetails().subscribe(response=>{
-      console.log(response)
-      this.user=response
-     },(error)=>{
-      console.log(error);
-      this.route.navigate(['/login']);
-      Swal.fire('Error!', 'Session Expired.', 'error');
-     })
      this.brandService.getBrands().subscribe(response=>{
         console.log(response)
         this.brands=response
+        this.lengthBrands=this.brands.length
      },(error)=>{
       console.log(error)
      })
+     this.modelService.getModels().subscribe(response=>{
+      console.log(response);
+      this.models=response
+     },
+    error=>{
+      console.log(error);
+    })
+    this.versionService.getVersions().subscribe(response=>{
+      console.log(response);
+      this.versions=response
+     },
+    error=>{
+      console.log(error);
+    })
   }
   switchTab(tab: string) {
     this.activeTab = tab;
@@ -71,7 +89,91 @@ export class ProductComponent implements OnInit {
     }).then((result) => {
       if (result.isConfirmed) {
         this.brandService.deleteBrand(id).subscribe(response => {
-          Swal.fire('Deleted!', 'User has been deleted.', 'success');
+          Swal.fire('Deleted!', 'Brand has been deleted.', 'success');
+        }, error => {
+          Swal.fire('Error!', 'Failed to delete user.', 'error');
+        });
+      }
+    });
+  }
+  onValidateModel(idModel:number,model:Model){
+    if(model.state!==State.Valid){
+      model.state=State.Valid
+      this.modelService.updateState(idModel,model).subscribe(respnse=>{
+        Swal.fire('Valid!', 'Model has been Validated.', 'success');
+      },(error)=>{
+        Swal.fire('Error!', 'Failed to Validate Model.', 'error');
+      })
+    }else{
+      Swal.fire('Error!', 'Model Already Valid.', 'error');
+    }
+  }
+  onRejectModel(idModel:number,model:Model){
+    if(model.state!==State.Rejected){
+      model.state=State.Rejected
+      this.modelService.updateState(idModel,model).subscribe(respnse=>{
+        Swal.fire('Rejected!', 'Model has been Rejected.', 'success');
+      },(error:any)=>{
+        Swal.fire('Error!', 'Failed to Reject Model.', 'error');
+      })
+    }else{
+      Swal.fire('Error!', 'Model Already Rejected.', 'error');
+    }
+  }
+  onDeleteeModel(idModel:number){
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'You are about to delete this model. This action cannot be undone.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes',
+      cancelButtonText: 'Cancel'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.modelService.deleteModel(idModel).subscribe(response => {
+          Swal.fire('Deleted!', 'Model has been deleted.', 'success');
+        }, error => {
+          Swal.fire('Error!', 'Failed to delete user.', 'error');
+        });
+      }
+    });
+  }
+  onValidateVersion(idVersion:number,version:Version){
+    if(version.state!==State.Valid){
+      version.state=State.Valid
+      this.versionService.updateState(idVersion,version).subscribe(respnse=>{
+        Swal.fire('Valid!', 'Version has been Validated.', 'success');
+      },(error)=>{
+        Swal.fire('Error!', 'Failed to Validate Version.', 'error');
+      })
+    }else{
+      Swal.fire('Error!', 'Version Already Valid.', 'error');
+    }
+  }
+  onRejectVersion(idVersion:number,version:Version){
+    if(version.state!==State.Rejected){
+      version.state=State.Rejected
+      this.versionService.updateState(idVersion,version).subscribe(respnse=>{
+        Swal.fire('Rejected!', 'Version has been Rejected.', 'success');
+      },(error:any)=>{
+        Swal.fire('Error!', 'Failed to Reject Version.', 'error');
+      })
+    }else{
+      Swal.fire('Error!', 'Version Already Rejected.', 'error');
+    }
+  }
+  onDeleteeVersion(idVersion:number){
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'You are about to delete this model. This action cannot be undone.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes',
+      cancelButtonText: 'Cancel'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.versionService.deleteVersion(idVersion).subscribe(response => {
+          Swal.fire('Deleted!', 'Model has been deleted.', 'success');
         }, error => {
           Swal.fire('Error!', 'Failed to delete user.', 'error');
         });

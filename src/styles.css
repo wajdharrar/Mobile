@@ -1242,3 +1242,19 @@ select::-ms-expand {
 .select:hover::after {
   color: #000;
 }
+.feature-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.feature {
+  flex: 0 0 calc(33.33% - 10px);
+  margin-bottom: 10px;
+}
+legend{
+  color: #5543ca;
+}
+.selectLabel{
+  color: #5543ca;
+}

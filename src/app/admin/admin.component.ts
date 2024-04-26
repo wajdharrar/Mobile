@@ -16,7 +16,7 @@ export class AdminComponent implements OnInit{
     this.authService.getUserDetails().subscribe(response=>{
       console.log(response)
       this.user=response
-      if(this.user.role.idRole!=2){
+      if(this.user.role.idRole!=1){
         this.route.navigate(['/login']);
         Swal.fire('Error!', 'You Have To Login First.', 'error');
       }

@@ -1,5 +1,6 @@
 import { State } from "../enum/State";
-import { Phone } from "./Phone";
+import { Model } from "./Model";
+import { Device } from "./Phone";
 import { Version } from "./Version";
 
 export interface Brand {
@@ -9,6 +10,5 @@ export interface Brand {
     descBrand: string;
     state: State;
     reason: string;
-    phones: Phone[];
-    versions: Version[];
+    model:Model
 }

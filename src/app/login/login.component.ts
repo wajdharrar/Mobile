@@ -34,10 +34,10 @@ export class LoginComponent implements OnInit{
       if(response!=null){
       console.log(response);
       localStorage.setItem("token",response.token)
-        if(response.idRole==2){
+        if(response.idRole==1){
           this.authServiceBE.setIsLoggedIn(true)
           this.route.navigate(['/admin/dashboard']);
-        }else if(response.idRole==1){
+        }else if(response.idRole==3){
           this.authServiceBE.setIsLoggedInClient(true)
           this.route.navigate(['/client/dashboard']);
         }else{

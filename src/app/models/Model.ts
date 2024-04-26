@@ -1,3 +1,4 @@
+import { State } from '../enum/State';
 import { Brand } from "./Brand";
 
 export interface Model{
@@ -6,4 +7,5 @@ export interface Model{
     imgModel:string;
     descModel:string;
     brand:Brand;
+    state:State;
 }

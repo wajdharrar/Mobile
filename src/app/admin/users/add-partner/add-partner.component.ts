@@ -17,14 +17,14 @@ export class AddPartnerComponent {
     name: '',
     lastName: 'none',
     number: '',
-    password: '',
+    mdp: '',
     email: '',
     adress: '',
     dob: 'none',
     img: '',
     stateUser: StateUser.ACTIVE,
     role: {
-      idRole: 3,
+      idRole: 2,
       nameRole: 'partner'
     }
   };
@@ -49,9 +49,8 @@ export class AddPartnerComponent {
   OnSave(): void {
     console.log(this.password);
     if (this.password === this.password2) {
-      this.user.password = this.password;
+      this.user.mdp = this.password;
       console.log(this.user);
-
       this.authService.Register(this.user).subscribe(
         (response) => {
           this.company=response;

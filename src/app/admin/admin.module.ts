@@ -25,6 +25,7 @@ import { DetailsVersionComponent } from './product/details-version/details-versi
 import { DetailsModelComponent } from './product/details-model/details-model.component';
 import { DevicesComponent } from './devices/devices.component';
 import { UpdateProfileAdminComponent } from './profile-admin/update-profile-admin/update-profile-admin.component';
+import { AddDeviceComponent } from './devices/add-device/add-device.component';
 
 
 
@@ -51,6 +52,7 @@ import { UpdateProfileAdminComponent } from './profile-admin/update-profile-admi
     UpdateVersionComponent,
     DetailsVersionComponent,
     DetailsModelComponent,
+    AddDeviceComponent,
     DevicesComponent,
     UpdateProfileAdminComponent
   ],

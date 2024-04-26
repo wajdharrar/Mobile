@@ -1,4 +1,4 @@
-import { Phone } from "./Phone";
+import { Device } from "./Phone";
 import { Shop } from "./Shop";
 import { User } from "./User";
 
@@ -10,6 +10,6 @@ export interface Partner {
     emailRes:string;
     numberRes:string;
     shops:Shop[];
-    devices :Phone[];
+    devices :Device[];
     user :User;
 }

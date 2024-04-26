@@ -1,4 +1,4 @@
-<div class="container" *ngIf="users!==undefined">
+<div class="container">
 	<div class="title">
 		<h1>Manage Clients</h1>
 	</div>
@@ -10,7 +10,7 @@
 			<input type="search" (ngModelChange)="searchUsers(key.value)" #key ngModel name="key" class="input-search" placeholder="Type to Search...">
 		</div>
 	</div>
-	<div class="row">
+	<div class="row" *ngIf="users!==undefined">
 	<div class="col-lg-12">
 		<div class="main-box clearfix">
 			<div class="table-responsive">
@@ -25,7 +25,7 @@
 						</tr>
 					</thead>
 					<tbody *ngFor="let user of users">
-						<tr *ngIf="user.role.idRole===1 ">
+						<tr>
 							<td>
 								<img src={{user.img}} alt="">
 								<a href="#" class="user-link">{{user.name}} {{user.lastName}}</a>
@@ -89,7 +89,7 @@
 	</div>
 </div>
 </div>
-<div *ngIf="users===undefined" class="alert alert-info" role="alert">
+<div *ngIf="users.length==0" class="alert alert-info" role="alert">
 	<h4 class="alert-heading">No Users !</h4>
 	Users List Is Empty
 </div>

@@ -27,14 +27,7 @@ export class UpdateBrandComponent {
     this.brandService.getBrand(this.brandId).subscribe(response=>{
       this.brand=response;
     })
-    this.authService.getUserDetails().subscribe(response=>{
-      console.log(response)
-      this.user=response
-     },(error)=>{
-      console.log(error);
-      this.router.navigate(['/login']);
-      Swal.fire('Error!', 'Session Expired.', 'error');
-  })}
+    }
   OnSave(){
     this.brandService.updateBrand(this.brandId,this.brand).subscribe(response=>{
       console.log(response);

@@ -5,13 +5,13 @@ import { Gift } from "./Gift";
 import { Sale } from "./Sale";
 import { User } from "./User";
 
-export interface Phone{
-    idPhone: number;
-    namePhone: string;
-    prix: number;
-    stock: number;
-    imgPhone: string;
-    descPhone: string;
+export interface Device{
+    idDevice: number;
+    nameDevice: string;
+    price: number;
+    inventory: number;
+    imgDevice: string;
+    descDevice: string;
     color: string;
     warranty: number;
     state: State;

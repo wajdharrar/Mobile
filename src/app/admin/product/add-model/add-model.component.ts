@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { Brand } from '../../../models/Brand';
 import { User } from '../../../models/User';
-import { AuthService } from '../../../services/auth.service';
 import { BrandService } from '../../../services/brand.service';
 import { FileService } from '../../../services/file.service';
 import { ModelService } from '../../../services/model.service';
@@ -20,47 +19,61 @@ export class AddModelComponent implements OnInit{
     nameModel:'',
     descModel:'',
     imgModel:'',
+    brand:{
+      nameBrand:'',
+      descBrand:'',
+      logoBrand:'',
+      state:State.Valid
+    },
     state:State.Valid
   }
   user!:User;
   selectedFile!:File|null;
   uploadProgress!:number;
-  constructor(private authService:AuthService,private route:Router,private modelService:ModelService,private fileService:FileService){  
-  }
+  brands!:Brand[];
+  brandSelected:number;
+  constructor(
+    private route:Router,
+    private modelService:ModelService,
+    private fileService:FileService,
+    private brandService:BrandService
+  ){}
   ngOnInit(): void {
-    this.authService.getUserDetails().subscribe(response=>{
-      console.log(response)
-      this.user=response
-     },(error)=>{
-      console.log(error);
-      this.route.navigate(['/login']);
-      Swal.fire('Error!', 'Session Expired.', 'error');
-  })}
-  OnSave(){
-    this.modelService.addModel(this.model).subscribe(response=>{
+    this.brandService.getBrands().subscribe(response=>{
       console.log(response);
-      Swal.fire({
-        title: 'Success!',
-        text: 'Brand added successfully',
-        icon: 'success',
-        confirmButtonText: 'Ok'
-      });
-      this.onUploadFile(response)
-
-          Swal.fire({
-            title: 'Success!',
-            text: 'User added successfully',
-            icon: 'success',
-            confirmButtonText: 'Ok'
-          });
-    },(error)=>{
-      console.log(error);
-      Swal.fire({
-        title: 'Error!',
-        text: 'Failed to add Brand',
-        icon: 'error',
-        confirmButtonText: 'Ok'
-      });
+      this.brands=response
+    },
+  (error)=>{
+    console.log(error);
+  })
+  }
+  OnSave(){
+    this.brandService.getBrand(this.brandSelected).subscribe(response=>{
+      this.model.brand=response
+      this.modelService.addModel(this.model).subscribe(response=>{
+        console.log(response);
+        Swal.fire({
+          title: 'Success!',
+          text: 'Model added successfully',
+          icon: 'success',
+          confirmButtonText: 'Ok'
+        });
+        this.onUploadFile(response)
+            Swal.fire({
+              title: 'Success!',
+              text: 'Model added successfully',
+              icon: 'success',
+              confirmButtonText: 'Ok'
+            });
+      },(error)=>{
+        console.log(error);
+        Swal.fire({
+          title: 'Error!',
+          text: 'Failed to add Model',
+          icon: 'error',
+          confirmButtonText: 'Ok'
+        });
+      })
     })
     this.route.navigate(["admin/product"]);
   }

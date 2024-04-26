@@ -74,34 +74,34 @@
             </div>
             <div class="text-feild col-lg-6">
                 <label for="password">Password:
-                    <input type="password" formControlName="password" id="password" name="password"  placeholder="Your Password" 
+                    <input type="password" formControlName="mdp" id="password" name="password"  placeholder="Your Password" 
                     minlength="8" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$" required/>
                 </label>
-                <div *ngIf="registerForm.get('password').invalid && (registerForm.get('password').dirty || registerForm.get('password').touched)" class="text-danger">
-                    <div  *ngIf="registerForm.get('password').errors && registerForm.get('password').errors['required']">
+                <div *ngIf="registerForm.get('mdp').invalid && (registerForm.get('mdp').dirty || registerForm.get('mdp').touched)" class="text-danger">
+                    <div  *ngIf="registerForm.get('mdp').errors && registerForm.get('mdp').errors['mdp']">
                       This field is required
                     </div>
-                    <div *ngIf="registerForm.get('password').errors && registerForm.get('password').errors['pattern']">
+                    <div *ngIf="registerForm.get('mdp').errors && registerForm.get('mdp').errors['pattern']">
                        <small>at least 1 uppercase and 1 Number</small>          
                      </div>
-                    <div *ngIf="registerForm.get('password').errors && registerForm.get('password').errors['minlength']">
+                    <div *ngIf="registerForm.get('mdp').errors && registerForm.get('mdp').errors['minlength']">
                        <small>at least 8 characters</small>  
                      </div>
                  </div>
             </div>
             <div class="text-feild col-lg-6">
                 <label for="confirm-password">Repeat Password:
-                    <input type="password" formControlName="confirmPassword" id="confirm-password" name="confirm-password"  placeholder="Repeat Your Password" 
+                    <input type="password" formControlName="confirmmdp" id="confirm-password" name="confirm-password"  placeholder="Repeat Your Password" 
                     minlength="8" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$" required/>
                 </label>
-                <div *ngIf="registerForm.get('confirmPassword').invalid && (registerForm.get('confirmPassword').dirty || registerForm.get('confirmPassword').touched)" class="text-danger">
-                    <div  *ngIf="registerForm.get('confirmPassword').errors && registerForm.get('confirmPassword').errors['required']">
+                <div *ngIf="registerForm.get('confirmmdp').invalid && (registerForm.get('confirmmdp').dirty || registerForm.get('confirmmdp').touched)" class="text-danger">
+                    <div  *ngIf="registerForm.get('confirmmdp').errors && registerForm.get('confirmmdp').errors['required']">
                       This field is required
                     </div>
-                    <div *ngIf="registerForm.get('confirmPassword').errors && registerForm.get('confirmPassword').errors['pattern']">
+                    <div *ngIf="registerForm.get('confirmmdp').errors && registerForm.get('confirmmdp').errors['pattern']">
                        <small>at least 1 uppercase and 1 Number</small>          
                      </div>
-                    <div *ngIf="registerForm.get('confirmPassword').errors && registerForm.get('confirmPassword').errors['minlength']">
+                    <div *ngIf="registerForm.get('confirmmdp').errors && registerForm.get('confirmmdp').errors['minlength']">
                        <small>at least 8 characters</small>  
                      </div>
                  </div>

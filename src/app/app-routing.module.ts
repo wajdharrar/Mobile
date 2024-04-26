@@ -42,6 +42,7 @@ import { UpdateVersionComponent } from './admin/product/update-version/update-ve
 import { DevicesComponent } from './admin/devices/devices.component';
 import { UpdateProfileAdminComponent } from './admin/profile-admin/update-profile-admin/update-profile-admin.component';
 import { UpdateProfileProviderComponent } from './provider/provider-profile/update-profile-provider/update-profile-provider.component';
+import { AddDeviceComponent } from './admin/devices/add-device/add-device.component';
 
 const routes: Routes = [
   {
@@ -111,7 +112,7 @@ const routes: Routes = [
         component:ProductComponent,
       },
       {
-        path:'product/addbrand',
+        path:'product/brand',
         component:AddBrandComponent,
       },
       {
@@ -123,7 +124,7 @@ const routes: Routes = [
         component:UpdateBrandComponent,
       },
       {
-        path:'product/addmodel',
+        path:'product/model',
         component:AddModelComponent,
       },
       {
@@ -134,7 +135,7 @@ const routes: Routes = [
         path:'product/updatemodel/:id',
         component:UpdateModelComponent,
       },{
-        path:'product/addversion',
+        path:'product/version',
         component:AddVersionComponent,
       },
       {
@@ -172,6 +173,10 @@ const routes: Routes = [
       {
         path:'device',
         component:DevicesComponent,
+      },
+      {
+        path:'device/add',
+        component:AddDeviceComponent,
       },
     ]
   },

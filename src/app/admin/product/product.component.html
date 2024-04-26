@@ -1,6 +1,13 @@
-<div class="container" *ngIf="brands.length!==0">
+<div class="container">
     <div class="title">
         <h1>Manage Products</h1>
+    </div>
+    <div class="row btns">
+        <div class="col-lg-12">
+            <a [routerLink]="'brand'" class="bn13">+ Add Brand</a>
+            <a [routerLink]="'model'" class="bn13">+ Add Model</a>
+            <a [routerLink]="'version'" class="bn13">+ Add Version</a>
+        </div>
     </div>
     <div class="col-md-11">
         <div class="profile-head">
@@ -19,72 +26,25 @@
     </div>
     <div class="col-md-2">
     </div>
-    <div class="row">
+    <div class="row" *ngIf="brands.length!==0">
         <div class="col-md-11">
             <div class="tab-content profile-tab" id="myTabContent">
                 <div class="tab-pane fade show active" id="brand" role="tabpanel" aria-labelledby="home-tab" [class.show]="activeTab === 'brand'">
-                    <div class="row btns">
-                        <div class="col-lg-6">
-                            <a [routerLink]="'addbrand'" class="bn13">+ Add Brand</a>
-                        </div>
-                    </div>
                     <div class="row">
                         <table class="table table-borderless">
                             <thead>
                                 <tr>
                                     <th>Logo</th>
                                     <th>Name</th>
+                                    <th>Status</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody *ngFor="let brand of brands">
                                 <tr>
-                                    <td style="width: 30%;"><img src="{{brand.logoBrand}}" style="width: 60%;"/></td>
+                                    <td style="width: 20%;"><img src="{{brand.logoBrand}}" style="width: 60%;"/></td>
                                     <td>{{brand.nameBrand}}</td>
-                                    <td style="width: 30%;">
-                                        <a [routerLink]="'detailsbrand/' + brand.idBrand" class="table-link">
-                                            <span class="fa-stack">
-                                                <i class="fa fa-square fa-stack-2x"></i>
-                                                <i class="fa fa-search-plus fa-stack-1x fa-inverse"></i>
-                                            </span>
-                                        </a>
-                                        <a [routerLink]="'updatebrand/' +  brand.idBrand" class="table-link">
-                                            <span class="fa-stack">
-                                                <i class="fa fa-square fa-stack-2x"></i>
-                                                <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
-                                            </span>
-                                        </a>
-                                        <a  class="table-link danger" (click)="onDeleteeBrand(brand.idBrand)">
-                                            <span class="fa-stack">
-                                                <i class="fa fa-square fa-stack-2x"></i>
-                                                <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
-                                            </span>
-                                        </a>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <div class="tab-pane fade show active" id="model" role="tabpanel" aria-labelledby="model-tab" [class.show]="activeTab === 'model'">
-                    <div class="row btns">
-                        <div class="col-lg-6">
-                            <a [routerLink]="'addmodel'" class="bn13">+ Add Model</a>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <table class="table table-borderless">
-                            <thead>
-                                <tr>
-                                    <th>Logo</th>
-                                    <th>Name</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody *ngFor="let brand of brands">
-                                <tr>
-                                    <td style="width: 30%;"><img src="{{brand.logoBrand}}" style="width: 60%;"/></td>
-                                    <td>{{brand.nameBrand}}</td>
+                                    <td>{{brand.state}}</td>
                                     <td style="width: 30%;">
                                         <a [routerLink]="'detailsbrand/' + brand.idBrand" class="table-link">
                                             <span class="fa-stack">
@@ -119,57 +79,123 @@
                                     </td>
                                 </tr>
                             </tbody>
-                        </table>                    
+                        </table>
+                        <div *ngIf="brands.length===0" class="alert alert-info" role="alert">
+                            <h4 class="alert-heading">No Brands !</h4>
+                            Brands List Is Empty
+                        </div>
                     </div>
                 </div>
-                <div class="tab-pane fade show active" id="version" role="tabpanel" aria-labelledby="version-tab" [class.show]="activeTab === 'version'">
+                <div class="tab-pane fade show active" id="model" role="tabpanel" aria-labelledby="model-tab" [class.show]="activeTab === 'model'" [style.margin-top]="'-'+lengthBrands * 11 + '%'">
                     <div class="row btns">
                         <div class="col-lg-6">
-                            <a [routerLink]="'add'" class="bn13">+ Add Version</a>
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="models.length!==0">
+                        <table class="table table-borderless">
+                            <thead>
+                                <tr>
+                                    <th>Image</th>
+                                    <th>Name</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody *ngFor="let model of models">
+                                <tr>
+                                    <td style="width: 20%;"><img src="{{model.imgModel}}" style="width: 60%;"/></td>
+                                    <td>{{model.nameModel}}</td>
+                                    <td>{{model.state}}</td>
+                                    <td style="width: 30%;">
+                                        <a [routerLink]="'detailsmodel/' + model.idModel" class="table-link">
+                                            <span class="fa-stack">
+                                                <i class="fa fa-square fa-stack-2x"></i>
+                                                <i class="fa fa-search-plus fa-stack-1x fa-inverse"></i>
+                                            </span>
+                                        </a>
+                                        <a [routerLink]="'updatemodel/' +  model.idModel" class="table-link">
+                                            <span class="fa-stack">
+                                                <i class="fa fa-square fa-stack-2x"></i>
+                                                <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
+                                            </span>
+                                        </a>
+                                        <a class="table-link" (click)="onValidateModel(model.idModel,model)">
+                                            <span class="fa-stack">
+                                                <i class="fa fa-square fa-stack-2x"></i>
+                                                <i class="fa fa-check fa-stack-1x fa-inverse"></i>
+                                            </span>
+                                        </a>
+                                        <a  class="table-link danger" (click)="onRejectModel(model.idModel,model)">
+                                            <span class="fa-stack">
+                                                <i class="fa fa-square fa-stack-2x"></i>
+                                                <i class="fa fa-ban fa-stack-1x fa-inverse"></i>
+                                            </span>
+                                        </a>
+                                        <a  class="table-link danger" (click)="onDeleteeModel(model.idModel)">
+                                            <span class="fa-stack">
+                                                <i class="fa fa-square fa-stack-2x"></i>
+                                                <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
+                                            </span>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table> 
+                        <div *ngIf="models.length===0" class="alert alert-info" role="alert">
+                            <h4 class="alert-heading">No Models !</h4>
+                            Models List Is Empty
+                        </div>                   
+                    </div>
+                </div>
+                <div class="tab-pane fade show active elevate" id="version" role="tabpanel" aria-labelledby="version-tab" [class.show]="activeTab === 'version'">
+                    <div class="row btns">
+                        <div class="col-lg-6">
                         </div>
                         <!--<div class="col-lg-6 input-wrapper">
                             <input type="search"  #key ngModel name="key" class="input-search" placeholder="Type to Search...">
                         </div>-->
                     </div>
-                    <div class="row">
+                    <div class="row" *ngIf="versions.length!==0">
                         <table class="table table-borderless">
                             <thead>
                                 <tr>
                                     <th>Logo</th>
                                     <th>Name</th>
+                                    <th>Status</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
-                            <tbody *ngFor="let brand of brands">
+                            <tbody *ngFor="let version of versions">
                                 <tr>
-                                    <td style="width: 30%;"><img src="{{brand.logoBrand}}" style="width: 60%;"/></td>
-                                    <td>{{brand.nameBrand}}</td>
+                                    <td style="width: 30%;"><img src="{{version.imgVersion}}" style="width: 60%;"/></td>
+                                    <td>{{version.nameVersion}}</td>
+                                    <td>{{version.state}}</td>
                                     <td style="width: 30%;">
-                                        <a [routerLink]="'detailsbrand/' + brand.idBrand" class="table-link">
+                                        <a [routerLink]="'detailsversion/' + version.idVersion" class="table-link">
                                             <span class="fa-stack">
                                                 <i class="fa fa-square fa-stack-2x"></i>
                                                 <i class="fa fa-search-plus fa-stack-1x fa-inverse"></i>
                                             </span>
                                         </a>
-                                        <a [routerLink]="'updatebrand/' +  brand.idBrand" class="table-link">
+                                        <a [routerLink]="'updateversion/' +  version.idVersion" class="table-link">
                                             <span class="fa-stack">
                                                 <i class="fa fa-square fa-stack-2x"></i>
                                                 <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
                                             </span>
                                         </a>
-                                        <a class="table-link" (click)="onValidateBrand(brand.idBrand,brand)">
+                                        <a class="table-link" (click)="onValidateVersion(version.idVersion,version)">
                                             <span class="fa-stack">
                                                 <i class="fa fa-square fa-stack-2x"></i>
                                                 <i class="fa fa-check fa-stack-1x fa-inverse"></i>
                                             </span>
                                         </a>
-                                        <a  class="table-link danger" (click)="onRejectBrand(brand.idBrand,brand)">
+                                        <a  class="table-link danger" (click)="onRejectVersion(version.idVersion,version)">
                                             <span class="fa-stack">
                                                 <i class="fa fa-square fa-stack-2x"></i>
                                                 <i class="fa fa-ban fa-stack-1x fa-inverse"></i>
                                             </span>
                                         </a>
-                                        <a  class="table-link danger" (click)="onDeleteeBrand(brand.idBrand)">
+                                        <a  class="table-link danger" (click)="onDeleteeVersion(version.idVersion)">
                                             <span class="fa-stack">
                                                 <i class="fa fa-square fa-stack-2x"></i>
                                                 <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
@@ -179,13 +205,16 @@
                                 </tr>
                             </tbody>
                         </table>
+                        <div *ngIf="versions.length===0" class="alert alert-info" role="alert">
+                            <h4 class="alert-heading">No Versions !</h4>
+                            Versions List Is Empty
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<div *ngIf="brands.length===0" class="alert alert-info" role="alert">
-    <h4 class="alert-heading">No Brands !</h4>
-    Brands List Is Empty
-</div>
+
+
+

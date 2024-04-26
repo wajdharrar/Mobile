@@ -1,5 +1,5 @@
 import { State } from "../enum/State";
-import { Phone } from "./Phone";
+import { Device } from "./Phone";
 
 export interface Sale{
     idSale: number;
@@ -8,5 +8,5 @@ export interface Sale{
     endDate: string;
     state: State;
     reason: string;
-    phones: Phone[];
+    phones: Device[];
 }
