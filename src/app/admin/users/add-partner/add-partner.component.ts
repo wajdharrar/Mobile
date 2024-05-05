@@ -57,6 +57,7 @@ export class AddPartnerComponent {
           console.log(response, 'company details');
           this.authService.getUserByToken(response.token).subscribe(response=>{
             console.log(response)
+            this.addManager(response.idUtilisateur);
             this.onUploadFile(response)
             Swal.fire({
               title: 'Success!',
@@ -65,7 +66,6 @@ export class AddPartnerComponent {
               confirmButtonText: 'Ok'
             });
           })
-          this.addManager();
         },
         (error) => {
           console.log(error);
@@ -79,8 +79,8 @@ export class AddPartnerComponent {
     }
   }
 
-  private addManager(): void {
-    this.manager.idUser=this.company.idUtilisateur
+  private addManager(id:number): void {
+    this.manager.idUser=id
     this.partnerService.addProvider(this.manager).subscribe(
       (response) => {
         console.log(response, 'manager');

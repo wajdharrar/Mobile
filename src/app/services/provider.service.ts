@@ -18,4 +18,7 @@ export class ProviderService {
   updateProvider(id:number,partner:any):Observable<Partner>{
     return this.http.put<Partner>(`${this.apiServerUrl}/update/${id}`,partner)
   }
+  deleteProvider(id:number){
+    return this.http.delete(`${this.apiServerUrl}/delete/${id}`)
+  }
 }

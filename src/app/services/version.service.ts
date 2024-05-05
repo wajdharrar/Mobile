@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
-import { Version } from '..//models/Version';
+import { Version } from '../models/Version';
 import { Model } from '../models/Model';
 
 

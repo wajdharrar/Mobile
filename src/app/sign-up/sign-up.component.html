@@ -108,7 +108,7 @@
             </div>
             <div class="text-feild col-lg-12">
                 <label class="label" for="img">Upload Image:
-                    <input type="file"  class="form-control form-control-lg" formControlName="img" id="img" name="img"  placeholder="Upload Your Image"  required/>
+                    <input type="file"  class="form-control form-control-lg" formControlName="img" id="img" name="img" (change)="onFileSelected($event)"  placeholder="Upload Your Image"  required/>
                 </label>
                 <div  *ngIf="registerForm.get('img')?.errors && registerForm.get('img')?.errors['required']">
                     <small>This field is required</small>

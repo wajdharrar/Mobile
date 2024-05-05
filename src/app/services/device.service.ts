@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { Device } from '../models/Phone';
+import { DeviceType } from '../models/DeviceType';
 
 @Injectable({
   providedIn: 'root'
@@ -12,13 +13,16 @@ export class DeviceService {
   getDevices(): Observable<Device[]> {
     return this.http.get<Device[]>(`${this.apiServerUrl}/all`);
   }
-  getDevice(id:number):Observable<Device>{
-    return this.http.get<Device>(`${this.apiServerUrl}/${id}`);
+  getDevice(id:number):Observable<any>{
+    return this.http.get<any>(`${this.apiServerUrl}/${id}`);
+  }
+  getDeviceByDeviceType(deviceType:DeviceType):Observable<any[]>{
+    return this.http.post<any[]>(`${this.apiServerUrl}/device`,deviceType);
   }
   addDevice(device:any):Observable<Device>{
     return this.http.post<Device>(`${this.apiServerUrl}/add`,device)
   }
-  updatDevice(id:number,device:Device):Observable<Device>{
+  updateDevice(id:number,device:any):Observable<Device>{
     return this.http.put<Device>(`${this.apiServerUrl}/update/${id}`,device);
   }
   deleteDevice(id:number|undefined):Observable<void>{

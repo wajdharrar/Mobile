@@ -26,6 +26,8 @@ import { DetailsModelComponent } from './product/details-model/details-model.com
 import { DevicesComponent } from './devices/devices.component';
 import { UpdateProfileAdminComponent } from './profile-admin/update-profile-admin/update-profile-admin.component';
 import { AddDeviceComponent } from './devices/add-device/add-device.component';
+import { UpdateDeviceComponent } from './devices/update-device/update-device.component';
+import { DetailsDeviceComponent } from './devices/details-device/details-device.component';
 
 
 
@@ -54,7 +56,9 @@ import { AddDeviceComponent } from './devices/add-device/add-device.component';
     DetailsModelComponent,
     AddDeviceComponent,
     DevicesComponent,
-    UpdateProfileAdminComponent
+    UpdateProfileAdminComponent,
+    UpdateDeviceComponent,
+    DetailsDeviceComponent
   ],
   imports: [
     CommonModule,

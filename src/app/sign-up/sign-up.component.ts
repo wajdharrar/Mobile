@@ -3,6 +3,8 @@ import { AuthService } from '../services/auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { User } from '../models/User';
+import { FileService } from '../services/file.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -12,7 +14,9 @@ import Swal from 'sweetalert2';
 export class SignUpComponent {
   registerForm!: FormGroup;
   role:any;
-  constructor(private authService:AuthService ,private fb:FormBuilder,private route:Router){
+  selectedFile!:File|null;
+  uploadProgress!:number;
+  constructor(private authService:AuthService ,private fb:FormBuilder,private route:Router,private fileService:FileService){
     this.role={
       idRole: 3,
       nameRole:"client"
@@ -39,7 +43,10 @@ export class SignUpComponent {
       console.log(this.registerForm.value);
       this.authService.Register(this.registerForm.value).subscribe(response=>{
         console.log(response)
-        this.route.navigate(['/login'])
+        this.authService.getUserByToken(response.token).subscribe(response=>{
+          console.log(response)
+          this.onUploadFile(response)
+        this.route.navigate(['/login'])})
       },error=>{
         Swal.fire({
           title:'Error !',
@@ -53,6 +60,35 @@ export class SignUpComponent {
         text:'Check your password',
         icon:'error'
       })
+    }
+  }
+  onFileSelected(event:any){
+    const fileList:FileList = event.target.files;
+    if(fileList && fileList.length>0){
+      this.selectedFile=fileList[0];
+    }
+  }
+  onUploadFile(user:User){
+    if(this.selectedFile){
+      this.fileService.uploadFile(this.selectedFile,user.idUtilisateur,'user').subscribe((progress)=>{
+        this.uploadProgress===progress
+        if(progress===100){
+          Swal.fire({
+            title:"success !",
+            text:'file uploaded successfuly',
+            icon:'success',
+            confirmButtonText:'ok'
+          })
+          this.selectedFile=null
+        }else{
+          Swal.fire({
+            title:"Error !",
+            text:'failed to upload file',
+            icon:'error',
+            confirmButtonText:'ok'
+          })
+        }
+      })    
     }
   }
 

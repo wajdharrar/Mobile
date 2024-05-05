@@ -22,4 +22,7 @@ export class FeatureService {
   getByVersionId(version:number): Observable<any>{
     return this.http.get<any>(`${this.apiServerUrl}/version/${version}`);
   }
+  getFeature(id:number):Observable<Feature>{
+    return this.http.get<any>(`${this.apiServerUrl}/${id}`);
+  }
 }

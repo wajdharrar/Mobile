@@ -48,7 +48,7 @@ export class UpdateBrandComponent {
       });
 
     })
-    this.router.navigate(["admin/products"]);
+    this.router.navigate(["admin/product"]);
   }
   onFileSelected(event:any){
     const fileList:FileList = event.target.files;

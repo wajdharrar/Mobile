@@ -1,5 +1,5 @@
 import { State } from "../enum/State";
-import { Brand } from "./Brand";
+import { Version } from "./Version";
 import { DeviceType } from "./DeviceType";
 import { Gift } from "./Gift";
 import { Sale } from "./Sale";
@@ -17,7 +17,7 @@ export interface Device{
     state: State;
     reason: string;
     sale: Sale;
-    brand: Brand;
+    version: Version;
     users: User[];
     gifts: Gift[];
     requests: Request[];

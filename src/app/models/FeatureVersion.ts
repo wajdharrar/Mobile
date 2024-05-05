@@ -1,5 +1,6 @@
 import { FeatureVersionId } from "./FeatureVersionId";
 
 export interface FeatureVersion{
-    featureVersionId:FeatureVersionId
+    idFeatureVersion:FeatureVersionId
+    value:string
 }

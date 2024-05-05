@@ -38,12 +38,6 @@ export class DetailsPartnerComponent {
    },(error)=>{
     console.log(error);
    })
-   this.authService.getUserDetails().subscribe(response=>{
-    console.log(response)
-    this.user=response
-   },(error)=>{
-    console.log(error);
- })
 }
  
 }

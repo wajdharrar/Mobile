@@ -43,12 +43,36 @@ import { DevicesComponent } from './admin/devices/devices.component';
 import { UpdateProfileAdminComponent } from './admin/profile-admin/update-profile-admin/update-profile-admin.component';
 import { UpdateProfileProviderComponent } from './provider/provider-profile/update-profile-provider/update-profile-provider.component';
 import { AddDeviceComponent } from './admin/devices/add-device/add-device.component';
+import { HomeContentComponent } from './home/home-content/home-content.component';
+import { DetailsDeviceComponent } from './home/details-device/details-device.component';
+import { UpdateDeviceComponent } from './admin/devices/update-device/update-device.component';
+import { DeviceTypeComponent } from './home/device-type/device-type.component';
 
 const routes: Routes = [
   {
-    path:'',
-    component:HomeComponent
+    path: '',
+    redirectTo: '/home',
+    pathMatch: 'full'
   },
+  {
+    path: 'home',
+    component: HomeComponent,
+    children: [
+      {
+        path: '',
+        component: HomeContentComponent
+      },
+      {
+        path:'device/:id',
+        component:DeviceTypeComponent
+      },
+      {
+        path:'details/:id',
+        component:DetailsDeviceComponent,
+      },
+  ]
+  },
+ 
   {
     path:"password/:id",
     component:PasswordComponent
@@ -177,6 +201,14 @@ const routes: Routes = [
       {
         path:'device/add',
         component:AddDeviceComponent,
+      },
+      {
+        path:'device/details/:id',
+        component:DetailsDeviceComponent,
+      },
+      {
+        path:'device/update/:id',
+        component:UpdateDeviceComponent,
       },
     ]
   },

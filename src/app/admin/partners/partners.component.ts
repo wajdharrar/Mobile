@@ -5,6 +5,7 @@ import { User } from '../../models/User';
 import { UserService } from '../../services/user.service';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
+import { ProviderService } from '../../services/provider.service';
 
 @Component({
   selector: 'app-partners',
@@ -13,7 +14,7 @@ import { Router } from '@angular/router';
 })
 export class PartnersComponent {
   users!:User[];
-  constructor(private authService:AuthService,private route:Router,private userService:UserService){}
+  constructor(private authService:AuthService,private route:Router,private userService:UserService,private providerService:ProviderService){}
   ngOnInit(): void {
      this.getUsers()    
   }
@@ -33,12 +34,17 @@ export class PartnersComponent {
       cancelButtonText: 'Cancel'
     }).then((result) => {
       if (result.isConfirmed) {
-        this.userService.deleteUser(id).subscribe(response => {
-          Swal.fire('Deleted!', 'User has been deleted.', 'success');
-          this.getUsers()
-        }, error => {
-          Swal.fire('Error!', 'Failed to delete user.', 'error');
-        });
+        this.providerService.deleteProvider(id).subscribe(response=>{
+          console.log(response)
+          this.userService.deleteUser(id).subscribe(response => {
+            Swal.fire('Deleted!', 'User has been deleted.', 'success');
+            this.getUsers()
+          }, error => {
+            Swal.fire('Error!', 'Failed to delete user.', 'error');
+          });
+        }
+        )
+        
       }
     });
   }

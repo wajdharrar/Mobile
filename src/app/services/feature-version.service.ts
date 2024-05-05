@@ -13,4 +13,8 @@ export class FeatureVersionService {
   constructor(private http : HttpClient) { }
   addFeaturesToVersion(idVersion:number,selectedValues: FeatureValue[]): Observable<FeatureVersion[]> {
     return this.http.post<FeatureVersion[]>(`${this.apiServerUrl}/add/${idVersion}`,selectedValues);
-  }}
+  }
+  getAllFeaturesByIdVersion(idVersion:number): Observable<FeatureVersion[]> {
+    return this.http.get<FeatureVersion[]>(`${this.apiServerUrl}/${idVersion}`);
+  }
+}

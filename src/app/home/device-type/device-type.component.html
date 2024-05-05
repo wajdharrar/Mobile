@@ -1,0 +1,98 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css">
+<div class="container" style="margin-top: 5%;">
+  <div class="row">
+    <div class="col-sm-4 col-md-3">
+      <form>
+        <div class="well">
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search products...">
+                <span class="input-group-btn">
+                  <button class="btn btn-primary" type="submit">
+                    <i class="fa fa-search"></i>
+                  </button>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+
+      <!-- Filter -->
+      <form class="shop__filter">
+        <!-- Price -->
+        <h3 class="headline">
+          <span>Price</span>
+        </h3>
+        <div class="radio">
+          <input type="radio" name="shop-filter__price" id="shop-filter-price_1" value="" checked="">
+          <label for="shop-filter-price_1">Under 1000DT</label>
+        </div>
+        <div class="radio">
+          <input type="radio" name="shop-filter__price" id="shop-filter-price_2" value="">
+          <label for="shop-filter-price_2">1000DT to 2000DT</label>
+        </div>
+        <div class="radio">
+          <input type="radio" name="shop-filter__price" id="shop-filter-price_3" value="">
+          <label for="shop-filter-price_3">3000DT to 4000DT</label>
+        </div>
+        <div class="radio">
+          <input type="radio" name="shop-filter__price" id="shop-filter-price_4" value="specify">
+          <label for="shop-filter-price_4">Other (specify)</label>
+        </div>
+        <!-- Checkboxes -->
+        <h3 class="headline">
+          <span>Brand</span>
+        </h3>
+        <div class="checkbox" *ngFor="let brand of allBrands">
+          <input type="checkbox" value="{{brand.nameBrand}}" id="{{brand.idBrand}}">
+          <label for="{{brand.idBrand}}">{{brand.nameBrand}}</label>
+        </div>
+      </form>
+    </div>
+    
+    <div class="col-sm-8 col-md-9">
+
+      <div class="row">
+        <div *ngFor="let device of allDevices" class="col-lg-3 col-md-4 col-sm-6">
+            <div class="card product_item">
+                <div class="body">
+                    <div class="cp_img">
+                        <a href="home/details/{{device.idDevice}}"><img src="{{device.imgDevice}}" alt="Product" class="img-fluid"></a>
+                        <div class="hover">
+                            <a href="javascript:void(0);" class="btn btn-primary btn-sm waves-effect"><i class="zmdi zmdi-plus"></i></a>
+                            <a href="javascript:void(0);" class="btn btn-primary btn-sm waves-effect"><i class="zmdi zmdi-shopping-cart"></i></a>
+                        </div>
+                    </div>
+                    <div class="product_details">
+                        <h5><a href="home/details/{{device.idDevice}}">{{device.nameDevice}}</a></h5>
+                        <ul class="product_price list-unstyled">
+                            <li class="old_price">{{device.price}} DT</li>
+                            <li class="new_price">{{((device.price-1)*01/7).toFixed(3)}} DT</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+      <!-- Pagination -->
+      <div class="row">
+        <div class="col-sm-12">
+
+          <ul class="pagination pull-right">
+            <li class="disabled"><a href="#">«</a></li>
+            <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">4</a></li>
+            <li><a href="#">5</a></li>
+            <li><a href="#">»</a></li>
+          </ul>
+          
+        </div>
+      </div> <!-- / .row -->
+      
+    </div> <!-- / .col-sm-8 -->
+  </div> <!-- / .row -->
+</div>
