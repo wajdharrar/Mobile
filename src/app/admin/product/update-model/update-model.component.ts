@@ -1,12 +1,10 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
-import { Brand } from '../../../models/Brand';
-import { AuthService } from '../../../services/auth.service';
-import { BrandService } from '../../../services/brand.service';
 import { FileService } from '../../../services/file.service';
 import { ModelService } from '../../../services/model.service';
 import { Model } from '../../../models/Model';
+import { State } from '../../../enum/State';
 
 @Component({
   selector: 'app-update-model',
@@ -19,9 +17,7 @@ export class UpdateModelComponent {
   selectedFile!:File|null;
   uploadProgress!:number;
   constructor(private route:ActivatedRoute,
-    private brandService:BrandService,
     private router:Router,
-    private authService:AuthService,
     private modelService:ModelService,
     private fileService:FileService){}
   ngOnInit(): void {
@@ -34,6 +30,7 @@ export class UpdateModelComponent {
     })
     }
   OnSave(){
+    this.model.state=State.Pending_Validation
     this.modelService.updateModel(this.modelId,this.model).subscribe(response=>{
       console.log(response);
       Swal.fire({

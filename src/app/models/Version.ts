@@ -9,4 +9,6 @@ export interface Version {
     state: State;
     reason: string;
     brand: Brand;
+    idPartner:number;
+    namePartner:string;
 }

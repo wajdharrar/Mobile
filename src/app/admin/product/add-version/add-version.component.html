@@ -1,80 +1,113 @@
-<section class="get-in-touch">
-    <div class="title">
-         <h1>Add Version</h1>
-     </div>
-    <form #addForm="ngForm" class="contact-form row" (ngSubmit)="OnSave()">
-        <div class="form-field col-lg-6">
-            <div class="select">
-                <select  [(ngModel)]="brandSelected" [ngModelOptions]="{standalone: true}" id="brandSelected" (change)="onBrandSelected(brandSelected)">
-                  <option *ngIf="brands==undefined" [value]="0" >no item found</option>
-                    <option *ngFor="let brand of brands" [value]="brand.idBrand" >{{brand.nameBrand}}</option>
-                </select>
-            </div>
-            <label class="label" for="brandSelected">Brand</label>
-        </div>
-        <div class="form-field col-lg-6">
-            <div class="select">
-                <select  [(ngModel)]="modelSelected" [ngModelOptions]="{standalone: true}" id="modelSelected">
-                    <option *ngIf="models==undefined" [value]="0" >no item found</option>
-                    <option *ngFor="let model of models" [value]="model.idModel" >{{model.nameModel}}</option>
-                </select>
-            </div>
-            <label class="label" for="modelSelected">Model</label>
-        </div>
-        <div class="form-field col-lg-6">
-          <div class="select">
-              <select  [(ngModel)]="deviceTypeSelected" [ngModelOptions]="{standalone: true}" id="deviceTypeSelected" (change)="onDeviceTypeSelected(deviceTypeSelected)">
-                  <option *ngIf="deviceTypes==undefined || deviceTypes.length==0" [value]="0" >no item found</option>
-                  <option *ngFor="let deviceType of deviceTypes" [value]="deviceType.idType" >{{deviceType.nameType}}</option>
-              </select>
-          </div>
-          <label class="label" for="deviceTypeSelected">Device Type</label>
+<div class="container">
+  <div class="title">
+      <h1>Add Version</h1>
+  </div>
+  <div class="row col-md-11">
+      <div class="profile-head">
+          <ul class="nav nav-tabs" id="myTab" role="tablist">
+              <li class="nav-item">
+                  <a class="nav-link" [routerLink]="'./'" fragment="version" (click)="switchTab('version')" role="tab" [class.active]="activeTab === 'version'">Version</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" [routerLink]="'./'" fragment="feature" (click)="switchTab('feature')" role="tab" [class.active]="activeTab === 'feature'">Feature</a>
+              </li>
+          </ul>
       </div>
-      <div *ngIf="deviceTypeSelected">
-        <div class="form-field col-lg-6" *ngFor="let feature of features">
-            <div class="selectLabel">{{ feature.nameFeature }}</div>
-            <div class="select">
-              <select [(ngModel)]="selectedValues[feature.idFeature]" [ngModelOptions]="{ standalone: true }" id="{{ feature.idFeature }}" (ngModelChange)="onFeaturesSelected($event, feature.idFeature)">
-                <option *ngIf="!values[feature.idFeature] || values[feature.idFeature].length === 0" [value]="0">No items found</option>
-                    <option *ngFor="let value of values[feature.idFeature]" [value]="value.value+' '+value.unit">{{ value.value }} {{value.unit}}</option>
-                </select>
-            </div>
-        </div>
-    </div>
-        
-        
-       <div class="form-field col-lg-6">
-          <input id="name" [(ngModel)]="version.nameVersion" #name="ngModel" name="name" class="input-text js-input" 
-          type="text" required maxlength="50">
- 
-          <label class="label" for="name">Name</label>
- 
-          <div *ngIf="name.invalid && (name.dirty || name.touched)" class="text-danger">
-            <div  *ngIf="name.errors && name.errors['required']">
-              This field is required
-            </div>
+  </div>
+  <div class="col-md-2"></div>
+  <div class="row">
+      <div class="col-md-11">
+          <div class="tab-content profile-tab" id="myTabContent">
+              <div *ngIf="activeTab === 'version'" class="tab-pane fade show active" id="version" role="tabpanel" aria-labelledby="version-tab">
+                  <form #addForm="ngForm" class="contact-form row" (ngSubmit)="OnSave()">
+                      <div class="form-field col-lg-6">
+                          <div class="select">
+                              <select [(ngModel)]="partnerSelected" [ngModelOptions]="{standalone: true}" (change)="OnPartnerSelected()">
+                                  <option *ngIf="partners == undefined" [value]="0">no item found</option>
+                                  <option *ngFor="let partner of partners" [value]="partner.idUtilisateur">{{partner.name}}</option>
+                              </select>
+                          </div>
+                          <label class="label" for="brandSelected">Partner</label>
+                      </div>
+                      <div class="form-field col-lg-6">
+                          <div class="select">
+                              <select [(ngModel)]="brandSelected" [ngModelOptions]="{standalone: true}" id="brandSelected" (change)="onBrandSelected(brandSelected)">
+                                  <option *ngIf="brands == undefined" [value]="0">no item found</option>
+                                  <option *ngFor="let brand of brands" [value]="brand.idBrand">{{brand.nameBrand}}</option>
+                              </select>
+                          </div>
+                          <label class="label" for="brandSelected">Brand</label>
+                      </div>
+                      <div class="form-field col-lg-6">
+                          <div class="select">
+                              <select [(ngModel)]="modelSelected" [ngModelOptions]="{standalone: true}" id="modelSelected">
+                                  <option *ngIf="models == undefined" [value]="0">no item found</option>
+                                  <option *ngFor="let model of models" [value]="model.idModel">{{model.nameModel}}</option>
+                              </select>
+                          </div>
+                          <label class="label" for="modelSelected">Model</label>
+                      </div>
+                      <div class="form-field col-lg-6">
+                          <div class="select">
+                              <select [(ngModel)]="deviceTypeSelected" [ngModelOptions]="{standalone: true}" id="deviceTypeSelected" (change)="onDeviceTypeSelected(deviceTypeSelected)">
+                                  <option *ngIf="deviceTypes == undefined || deviceTypes.length == 0" [value]="0">no item found</option>
+                                  <option *ngFor="let deviceType of deviceTypes" [value]="deviceType.idType">{{deviceType.nameType}}</option>
+                              </select>
+                          </div>
+                          <label class="label" for="deviceTypeSelected">Device Type</label>
+                      </div>
+                      <div class="form-field col-lg-6">
+                          <input id="name" [(ngModel)]="version.nameVersion" #name="ngModel" name="name" class="input-text js-input" type="text" required maxlength="50">
+                          <label class="label" for="name">Name</label>
+                          <div *ngIf="name.invalid && (name.dirty || name.touched)" class="text-danger">
+                              <div *ngIf="name.errors && name.errors['required']">
+                                  This field is required
+                              </div>
+                          </div>
+                      </div>
+                      <div class="form-field col-lg-6">
+                          <input id="descBrand" [(ngModel)]="version.descVersion" #descVersion="ngModel" class="input-text js-input" type="text" maxlength="255" required [ngModelOptions]="{standalone: true}">
+                          <label class="label" for="descBrand">Description</label>
+                          <div *ngIf="descVersion.invalid && (descVersion.dirty || descVersion.touched)" class="text-danger">
+                              <div *ngIf="descVersion.errors && descVersion.errors['required']">
+                                  This field is required
+                              </div>
+                          </div>
+                      </div>
+                      <div class="form-field col-lg-12">
+                          <label class="label" for="img" maxlength="2550">Image</label>
+                          <input id="img" [(ngModel)]="version.imgVersion" class="form-control form-control-lg" type="file" (change)="onFileSelected($event)" required [ngModelOptions]="{standalone: true}" placeholder="Choose file">
+                      </div>
+                      <div class="form-field col-lg-12">
+                          <input class="bn13" type="submit" value="Save" [disabled]="addForm.invalid">
+                      </div>
+                  </form>
+              </div>
+              <div *ngIf="activeTab === 'feature'" class="tab-pane fade show active" id="feature" role="tabpanel" aria-labelledby="model-tab">
+                <form #addFeatureForm="ngForm" class="contact-form row" (ngSubmit)="OnSaveFeature()">
+                  <div *ngIf="deviceTypeSelected">
+                    <div class="row">
+                      <div class="form-field col-lg-4" *ngFor="let feature of features">
+                        <div class="selectLabel">{{ feature.nameFeature }}</div>
+                        <div class="select">
+                            <select [(ngModel)]="selectedValues[feature.idFeature]" [ngModelOptions]="{ standalone: true }" id="{{ feature.idFeature }}" (ngModelChange)="onFeaturesSelected($event, feature.idFeature)">
+                                <option *ngIf="!values[feature.idFeature] || values[feature.idFeature].length === 0" [value]="0">No items found</option>
+                                <option *ngFor="let value of values[feature.idFeature]" [value]="value.unit ? value.value + ' ' + value.unit : value.value">{{ value.value }} {{value.unit}}</option>
+                            </select>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+                <div *ngIf="deviceTypeSelected" class="form-field col-lg-12">
+                  <input class="bn13" type="submit" value="Save" [disabled]="addFeatureForm.invalid">
+              </div>
+                </form>
+                  <div *ngIf="!deviceTypeSelected" class="alert alert-info" role="alert">
+                      <h4 class="alert-heading">No Features !</h4>
+                      Select Device Type First
+                  </div>
+              </div>
           </div>
-       </div>
-       <div class="form-field col-lg-6">
- 
-         <input id="descBrand" [(ngModel)]="version.descVersion" #descVersion="ngModel" class="input-text js-input" 
-         type="text"  maxlength="255" required [ngModelOptions]="{standalone: true}">
- 
-         <label class="label" for="descBrand">Description</label>
- 
-         <div *ngIf="descVersion.invalid && (descVersion.dirty || descVersion.touched)" class="text-danger">
-            <div  *ngIf="descVersion.errors && descVersion.errors['required']">
-              This field is required
-            </div>
-         </div>
-       </div>
-       <div class="form-field col-lg-12">
-        <label class="label" for="img" maxlength="2550">Image</label>
-        <input id="img" [(ngModel)]="version.imgVersion" class="form-control form-control-lg" type="file" (change)="onFileSelected($event)" required [ngModelOptions]="{standalone: true}" placeholder="Choose file">
-        </div>
-        <div class="form-field col-lg-12">
-           <input class="bn13" type="submit" value="Save" [disabled]="addForm.invalid">
-        </div>
-     </form>
-  </section>
-  
+      </div>
+  </div>
+</div>

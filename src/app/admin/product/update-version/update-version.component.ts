@@ -1,10 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
-import { Brand } from '../../../models/Brand';
 import { User } from '../../../models/User';
-import { AuthService } from '../../../services/auth.service';
-import { BrandService } from '../../../services/brand.service';
 import { FileService } from '../../../services/file.service';
 import { VersionService } from '../../../services/version.service';
 import { Version } from '../../../models/Version';
@@ -20,7 +17,10 @@ export class UpdateVersionComponent {
   user!:User;
   selectedFile!:File|null;
   uploadProgress!:number;
-  constructor(private route:ActivatedRoute,private versionService:VersionService,private router:Router,private authService:AuthService,private fileService:FileService){}
+  constructor(private route:ActivatedRoute,
+    private versionService:VersionService,
+    private router:Router,
+    private fileService:FileService){}
   ngOnInit(): void {
     this.route.params.subscribe(param=>{
       this.versionId=param['id'];

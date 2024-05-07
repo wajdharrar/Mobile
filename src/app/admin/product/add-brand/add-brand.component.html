@@ -31,6 +31,15 @@
             </div>
          </div>
        </div>
+       <div class="form-field col-lg-6">
+        <div class="select">
+            <select  [(ngModel)]="partnerSelected" [ngModelOptions]="{standalone: true}">
+                <option *ngIf="partners==undefined" [value]="0" >no item found</option>
+                <option *ngFor="let partner of partners" [value]="partner.idUtilisateur" >{{partner.name}}</option>
+            </select>
+        </div>
+        <label class="label" for="brandSelected">Partner</label>
+      </div>
        <div class="form-field col-lg-12">
         <label class="label" for="img" maxlength="2550">Logo</label>
         <input id="img" [(ngModel)]="brand.logoBrand" class="form-control form-control-lg" type="file" (change)="onFileSelected($event)" required [ngModelOptions]="{standalone: true}" placeholder="Choose file">

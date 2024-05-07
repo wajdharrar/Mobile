@@ -8,6 +8,7 @@ import { BrandService } from '../../../services/brand.service';
 import { FileService } from '../../../services/file.service';
 import { ModelService } from '../../../services/model.service';
 import { Model } from '../../../models/Model';
+import { UserService } from '../../../services/user.service';
 
 @Component({
   selector: 'app-add-model',
@@ -28,24 +29,33 @@ export class AddModelComponent implements OnInit{
     state:State.Valid
   }
   user!:User;
+  partners:User[]
+  partnerSelected:number
   selectedFile!:File|null;
   uploadProgress!:number;
   brands!:Brand[];
   brandSelected:number;
   constructor(
     private route:Router,
+    private userService:UserService,
     private modelService:ModelService,
     private fileService:FileService,
     private brandService:BrandService
   ){}
   ngOnInit(): void {
-    this.brandService.getBrands().subscribe(response=>{
+    this.userService.getPartners().subscribe(response=>{
+      this.partners=response
+    }
+  )
+  }
+  OnPartnerSelected(){
+    this.brandService.getBrandsByPartner(this.partnerSelected).subscribe(response=>{
       console.log(response);
       this.brands=response
     },
-  (error)=>{
-    console.log(error);
-  })
+    (error)=>{
+      console.log(error);
+    })
   }
   OnSave(){
     this.brandService.getBrand(this.brandSelected).subscribe(response=>{

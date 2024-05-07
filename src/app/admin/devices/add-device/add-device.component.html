@@ -3,6 +3,15 @@
          <h1>Add Device</h1>
      </div>
     <form #addForm="ngForm" class="contact-form row" (ngSubmit)="OnSave()">
+      <div class="form-field col-lg-6">
+        <div class="select">
+            <select  [(ngModel)]="partnerSelected" [ngModelOptions]="{standalone: true}"(change)="OnPartnerSelected()">
+                <option *ngIf="partners==undefined" [value]="0" >no item found</option>
+                <option *ngFor="let partner of partners" [value]="partner.idUtilisateur" >{{partner.name}}</option>
+            </select>
+        </div>
+        <label class="label" for="brandSelected">Partner</label>
+      </div>
         <div class="form-field col-lg-6">
             <div class="select">
                 <select  [(ngModel)]="brandSelected" [ngModelOptions]="{standalone: true}" id="brandSelected" (change)="onBrandSelected(brandSelected)">

@@ -13,6 +13,12 @@ export class ModelService {
   getModels(): Observable<Model[]> {
     return this.http.get<Model[]>(`${this.apiServerUrl}/all`);
   }
+  getPartnerIds(id:number): Observable<number> {
+    return this.http.get<number>(`${this.apiServerUrl}/idPartners/${id}`);
+  }
+  getModelsByPartner(idPartner:number): Observable<Model[]> {
+    return this.http.get<Model[]>(`${this.apiServerUrl}/all/${idPartner}`);
+  }
   getModel(id:number): Observable<any> {
     return this.http.get<Model>(`${this.apiServerUrl}/${id}`);
   }

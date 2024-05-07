@@ -8,4 +8,6 @@ export interface Model{
     descModel:string;
     brand:Brand;
     state:State;
+    idPartner:number;
+    namePartner:string;
 }

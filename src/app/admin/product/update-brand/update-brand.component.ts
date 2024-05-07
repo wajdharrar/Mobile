@@ -6,6 +6,7 @@ import Swal from 'sweetalert2';
 import { AuthService } from '../../../services/auth.service';
 import { User } from '../../../models/User';
 import { FileService } from '../../../services/file.service';
+import { UserService } from '../../../services/user.service';
 
 @Component({
   selector: 'app-update-brand',
@@ -16,9 +17,15 @@ export class UpdateBrandComponent {
   brandId!:any;
   brand!:Brand;
   user!:User;
+  partners:User[]
   selectedFile!:File|null;
+  partnerSelected:number;
   uploadProgress!:number;
-  constructor(private route:ActivatedRoute,private brandService:BrandService,private router:Router,private authService:AuthService,private fileService:FileService){}
+  constructor(private route:ActivatedRoute,
+    private brandService:BrandService,
+    private userService:UserService,
+    private router:Router,
+    private fileService:FileService){}
   ngOnInit(): void {
     this.route.params.subscribe(param=>{
       this.brandId=param['id'];
@@ -27,6 +34,10 @@ export class UpdateBrandComponent {
     this.brandService.getBrand(this.brandId).subscribe(response=>{
       this.brand=response;
     })
+    this.userService.getPartners().subscribe(response=>{
+      this.partners=response
+    }
+  )
     }
   OnSave(){
     this.brandService.updateBrand(this.brandId,this.brand).subscribe(response=>{

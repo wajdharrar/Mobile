@@ -1,4 +1,3 @@
-import { state } from '@angular/animations';
 import { Component } from '@angular/core';
 import { State } from '../../../enum/State';
 import { Router } from '@angular/router';
@@ -8,6 +7,7 @@ import { User } from '../../../models/User';
 import { BrandService } from '../../../services/brand.service';
 import { FileService } from '../../../services/file.service';
 import { Brand } from '../../../models/Brand';
+import { UserService } from '../../../services/user.service';
 
 @Component({
   selector: 'app-add-brand',
@@ -19,23 +19,32 @@ export class AddBrandComponent {
     nameBrand:'',
     descBrand:'',
     logoBrand:'',
+    idPartner:0,
     state:State.Valid
   }
   user!:User;
+  partners:User[];
   selectedFile!:File|null;
   uploadProgress!:number;
-  constructor(private authService:AuthService,private route:Router,private brandService:BrandService,private fileService:FileService){  
+  partnerSelected:number;
+  activeTab: string = 'brand';
+  constructor(private authService:AuthService,
+    private userService:UserService,
+    private route:Router,
+    private brandService:BrandService,
+    private fileService:FileService){  
   }
   ngOnInit(): void {
-    this.authService.getUserDetails().subscribe(response=>{
-      console.log(response)
-      this.user=response
-     },(error)=>{
-      console.log(error);
-      this.route.navigate(['/login']);
-      Swal.fire('Error!', 'Session Expired.', 'error');
-  })}
+    this.userService.getPartners().subscribe(response=>{
+        this.partners=response
+      }
+    )
+  }
+  switchTab(tab: string) {
+    this.activeTab = tab;
+  }
   OnSave(){
+    this.brand.idPartner=this.partnerSelected
     this.brandService.addBrand(this.brand).subscribe(response=>{
       console.log(response);
       Swal.fire({
@@ -61,6 +70,7 @@ export class AddBrandComponent {
         confirmButtonText: 'Ok'
       });
     })
+
     this.route.navigate(["admin/product"]);
   }
   onFileSelected(event:any){
@@ -92,4 +102,5 @@ export class AddBrandComponent {
       })    
     }
   }
+  
 }

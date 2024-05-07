@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import Swal from 'sweetalert2';
-import { Router } from '@angular/router';
 import { User } from '../../models/User';
 import { BrandService } from '../../services/brand.service';
 import { Brand } from '../../models/Brand';
@@ -10,6 +9,7 @@ import { ModelService } from '../../services/model.service';
 import { Model } from '../../models/Model';
 import { VersionService } from '../../services/version.service';
 import { Version } from '../../models/Version';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-product',
@@ -18,13 +18,15 @@ import { Version } from '../../models/Version';
 })
 export class ProductComponent implements OnInit {
   user!:User;
+  partners: User[] = [];
+  partnersModel: User[] = [];
   brands!:Brand[];
   models!:Model[];
   versions!:Version[];
   lengthBrands!:number;
   activeTab: string = 'brand';
   constructor(private authService:AuthService,
-              private route:Router,
+              private userService:UserService,
               private brandService:BrandService,
               private versionService:VersionService,
               private modelService:ModelService){}
@@ -33,12 +35,28 @@ export class ProductComponent implements OnInit {
         console.log(response)
         this.brands=response
         this.lengthBrands=this.brands.length
+        for (let index = 0; index < this.brands.length; index++) {
+          const element = this.brands[index].idPartner;
+          this.userService.getUser(element).subscribe(response=>{
+            this.brands[index].namePartner=response.name
+          })
+        }
+        console.log(this.partners)
      },(error)=>{
       console.log(error)
      })
      this.modelService.getModels().subscribe(response=>{
       console.log(response);
       this.models=response
+      for (let index = 0; index < this.models.length; index++) {
+        const element = this.models[index];
+        this.modelService.getPartnerIds(element.idModel).subscribe(response=>{
+            this.userService.getUser(response).subscribe(response=>{
+              element.namePartner=response.name
+            })
+        })
+      }
+      
      },
     error=>{
       console.log(error);
@@ -46,6 +64,15 @@ export class ProductComponent implements OnInit {
     this.versionService.getVersions().subscribe(response=>{
       console.log(response);
       this.versions=response
+      for (let index = 0; index < this.versions.length; index++) {
+        const element = this.versions[index];
+        this.versionService.getPartnerIds(element.idVersion).subscribe(response=>{
+          console.log(response)
+            this.userService.getUser(response).subscribe(response=>{
+              element.namePartner=response.name
+            })
+        })
+      }
      },
     error=>{
       console.log(error);

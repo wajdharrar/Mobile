@@ -47,6 +47,19 @@ import { HomeContentComponent } from './home/home-content/home-content.component
 import { DetailsDeviceComponent } from './home/details-device/details-device.component';
 import { UpdateDeviceComponent } from './admin/devices/update-device/update-device.component';
 import { DeviceTypeComponent } from './home/device-type/device-type.component';
+import { DevicesProviderComponent } from './provider/devices-provider/devices-provider.component';
+import { AddDeviceProviderComponent } from './provider/devices-provider/add-device-provider/add-device-provider.component';
+import { DetailsDeviceProviderComponent } from './provider/devices-provider/details-device-provider/details-device-provider.component';
+import { UpdateDeviceProviderComponent } from './provider/devices-provider/update-device-provider/update-device-provider.component';
+import { AddBrandProviderComponent } from './provider/provider-product/add-brand-provider/add-brand-provider.component';
+import { DetailsBrandProviderComponent } from './provider/provider-product/details-brand-provider/details-brand-provider.component';
+import { UpdateBrandProviderComponent } from './provider/provider-product/update-brand-provider/update-brand-provider.component';
+import { AddModelProviderComponent } from './provider/provider-product/add-model-provider/add-model-provider.component';
+import { DetailsModelProviderComponent } from './provider/provider-product/details-model-provider/details-model-provider.component';
+import { UpdateModelProviderComponent } from './provider/provider-product/update-model-provider/update-model-provider.component';
+import { AddVersionProviderComponent } from './provider/provider-product/add-version-provider/add-version-provider.component';
+import { DetailsVersionProviderComponent } from './provider/provider-product/details-version-provider/details-version-provider.component';
+import { UpdateVersionProviderComponent } from './provider/provider-product/update-version-provider/update-version-provider.component';
 
 const routes: Routes = [
   {
@@ -245,6 +258,57 @@ const routes: Routes = [
       {
         path:'product',
         component:ProviderProductComponent,
+      },
+      {
+        path:'product/brand',
+        component:AddBrandProviderComponent,
+      },
+      {
+        path:'product/detailsbrand/:id',
+        component:DetailsBrandProviderComponent,
+      },
+      {
+        path:'product/updatebrand/:id',
+        component:UpdateBrandProviderComponent,
+      },
+      {
+        path:'product/model',
+        component:AddModelProviderComponent,
+      },
+      {
+        path:'product/detailsmodel/:id',
+        component:DetailsModelProviderComponent,
+      },
+      {
+        path:'product/updatemodel/:id',
+        component:UpdateModelProviderComponent,
+      },{
+        path:'product/version',
+        component:AddVersionProviderComponent,
+      },
+      {
+        path:'product/detailsversion/:id',
+        component:DetailsVersionProviderComponent,
+      },
+      {
+        path:'product/updateversion/:id',
+        component:UpdateVersionProviderComponent,
+      },
+      {
+        path:'device',
+        component:DevicesProviderComponent,
+      },
+      {
+        path:'device/add',
+        component:AddDeviceProviderComponent,
+      },
+      {
+        path:'device/update/:id',
+        component:UpdateDeviceProviderComponent,
+      },
+      {
+        path:'device/details/:id',
+        component:DetailsDeviceProviderComponent,
       },
       {
         path:'profile',

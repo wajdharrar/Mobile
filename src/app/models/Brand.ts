@@ -1,7 +1,5 @@
 import { State } from "../enum/State";
 import { Model } from "./Model";
-import { Device } from "./Phone";
-import { Version } from "./Version";
 
 export interface Brand {
     idBrand: number;
@@ -11,4 +9,6 @@ export interface Brand {
     state: State;
     reason: string;
     model:Model
+    idPartner:number;
+    namePartner:string;
 }

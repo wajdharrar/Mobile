@@ -18,6 +18,7 @@ import { FeatureVersionService } from '../../../services/feature-version.service
 import { ValueService } from '../../../services/value.service';
 import { Value } from '../../../models/Value';
 import { FeatureValue } from '../../../models/tools/FeatureValue';
+import { UserService } from '../../../services/user.service';
 
 @Component({
   selector: 'app-add-version',
@@ -43,6 +44,8 @@ export class AddVersionComponent {
     },
     state: State.Valid
   };
+  partners:User[]
+  partnerSelected:number
   user!: User;
   selectedFile!: File | null;
   uploadProgress!: number;
@@ -57,7 +60,10 @@ export class AddVersionComponent {
   selectedValues: { [key: number]: string } = {};
   selectedValuesToSave: FeatureValue[] = []; // Initialize selectedValuesToSave array
   featuresSelected!:any[]
+  activeTab: string = 'version';
+  versionSaved!:Version;
   constructor(
+    private userService:UserService,
     private route: Router,
     private modelService: ModelService,
     private fileService: FileService,
@@ -70,14 +76,11 @@ export class AddVersionComponent {
   ) {}
 
   ngOnInit(): void {
-    this.brandService.getBrands().subscribe(response => {
-      console.log(response);
-      this.brands = response;
-    },
-      (error) => {
-        console.log(error);
-      });
-
+    this.userService.getPartners().subscribe(response=>{
+      this.partners=response
+    },(error) => {
+      console.log(error);
+    });
     this.deviceTypeService.getDeviceTypes().subscribe(response => {
       console.log(response);
       this.deviceTypes = response;
@@ -86,7 +89,18 @@ export class AddVersionComponent {
         console.log(error);
       });
   }
-
+  switchTab(tab: string) {
+    this.activeTab = tab;
+  }
+  OnPartnerSelected(){
+    this.brandService.getBrandsByPartner(this.partnerSelected).subscribe(response=>{
+      console.log(response);
+      this.brands=response
+    },
+    (error)=>{
+      console.log(error);
+    })
+  }
   onBrandSelected(brand: number) {
     this.brandService.getBrand(this.brandSelected).subscribe(response => {
       this.modelService.getModelsBybrand(response).subscribe(response => {
@@ -141,10 +155,8 @@ export class AddVersionComponent {
         this.version.model = response;
         this.versionService.addVersion(this.version).subscribe(response => {
           console.log(response);
+          this.versionSaved=response
           this.onUploadFile(response);
-          this.featureVersionService.addFeaturesToVersion(response.idVersion, this.selectedValuesToSave).subscribe(response => {
-            console.log(response);
-          });
           Swal.fire({
             title: 'Success!',
             text: 'Version added successfully',
@@ -162,9 +174,36 @@ export class AddVersionComponent {
         });
       });
     });
-    this.route.navigate(["admin/product"]);
+    this.route.navigate(["admin/product/version#feature"]);
   }
-
+  OnSaveFeature(){
+    if(this.versionSaved!=undefined){
+      this.featureVersionService.addFeaturesToVersion(this.versionSaved.idVersion, this.selectedValuesToSave).subscribe(response => {
+        console.log(response);
+        Swal.fire({
+          title: 'Success!',
+          text: 'Features added successfully',
+          icon: 'success',
+          confirmButtonText: 'Ok'
+        });
+        this.route.navigate(["admin/product"]);
+      },(error)=>{
+        Swal.fire({
+          title: 'Error!',
+          text: 'Failure could not add features to version delete version',
+          icon: 'error',
+          confirmButtonText: 'Ok'
+        });
+      });
+    }else{
+      Swal.fire({
+        title: 'Error!',
+        text: 'Add Version First',
+        icon: 'error',
+        confirmButtonText: 'Ok'
+      });
+    }
+  }
   onFileSelected(event: any) {
     const fileList: FileList = event.target.files;
     if (fileList && fileList.length > 0) {

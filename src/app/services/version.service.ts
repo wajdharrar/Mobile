@@ -14,6 +14,12 @@ export class VersionService {
   getVersions(): Observable<Version[]> {
     return this.http.get<Version[]>(`${this.apiServerUrl}/all`);
   }
+  getPartnerIds(id:number): Observable<number> {
+    return this.http.get<number>(`${this.apiServerUrl}/idPartners/${id}`);
+  }
+  getVersionsByPartner(idPartner:number): Observable<Version[]> {
+    return this.http.get<Version[]>(`${this.apiServerUrl}/all/${idPartner}`);
+  }
   getVersion(id:number): Observable<any> {
     return this.http.get<any>(`${this.apiServerUrl}/${id}`);
   }
@@ -30,6 +36,6 @@ export class VersionService {
     return this.http.put<Version>(`${this.apiServerUrl}/updatestate/${id}`, version);
   }
   getVersionByModel(model:Model): Observable<Version[]> {
-    return this.http.get<Version[]>(`${this.apiServerUrl}/all`);
+    return this.http.post<Version[]>(`${this.apiServerUrl}/all/model`,model);
   }
 }
