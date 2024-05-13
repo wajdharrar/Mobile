@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { User } from '../models/User';
+import { UserRoleCount } from '../tools/UserRoleCount';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,9 @@ export class UserService {
   constructor(private http : HttpClient) { }
     getUsers(): Observable<User[]> {
       return this.http.get<User[]>(`${this.apiServerUrl}/user/all`);
+    }
+    getUsersByRole(): Observable<UserRoleCount[]> {
+      return this.http.get<UserRoleCount[]>(`${this.apiServerUrl}/user/role`);
     }
     getPartners(): Observable<User[]> {
       return this.http.get<User[]>(`${this.apiServerUrl}/user/partner`);

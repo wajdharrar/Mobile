@@ -32,14 +32,7 @@ export class UpdateUserComponent implements OnInit{
     this.userService.getUser(this.userId).subscribe(response=>{
       this.user=response;
     })
-    this.authService.getUserDetails().subscribe(response=>{
-      console.log(response)
-      this.user=response
-     },(error)=>{
-      console.log(error);
-      this.router.navigate(['/login']);
-      Swal.fire('Error!', 'Session Expired.', 'error');
-  })}
+    }
   OnSave(){
     this.userService.updateUser(this.userId,this.user).subscribe(response=>{
       console.log(response);

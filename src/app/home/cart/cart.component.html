@@ -1,0 +1,48 @@
+<div class="container pb-5 mb-2" *ngIf="devices.length!==0">
+    <!-- Cart Item-->
+    <div class="cart-item d-md-flex justify-content-between mt-5" *ngFor="let device of devices"><span class="remove-item" (click)="removeItem(device.nameDevice)"><i class="fa fa-times"></i></span>
+        <div class="px-3 my-3">
+            <a class="cart-item-product" href="#">
+                <div class="cart-item-product-thumb"><img src="{{device.imgDevice}}" alt="Product"></div>
+                <div class="cart-item-product-info">
+                    <h4 class="cart-item-product-title">{{device.nameDevice}}</h4><span><strong>Type:</strong> {{device.deviceType.nameType}}</span><span><strong>Color:</strong>{{device.color}}</span>
+                </div>
+            </a>
+        </div>
+        <div class="px-3 my-3 text-center">
+            <div class="cart-item-label">Quantity</div>
+            <div class="count-input">
+                <select class="form-control" [(ngModel)]="device.number">
+                    <option selected>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                </select>
+            </div>
+        </div>
+        <div class="px-3 my-3 text-center">
+            <div class="cart-item-label">Subtotal</div><span class="text-xl font-weight-medium">{{device.price}} DT</span>
+        </div>
+        <div class="px-3 my-3 text-center">
+            <div class="cart-item-label">Monthly payement</div><span class="text-xl font-weight-medium">{{((device.price-1)*01/7).toFixed(3)}} DT</span>
+        </div>
+    </div>
+    <!-- total-->
+    <div class="d-sm-flex justify-content-between align-items-center text-center text-sm-left">
+        <div class="py-2"><span class="d-inline-block align-middle text-sm text-muted font-weight-medium text-uppercase text-xxl mr-2 ">Total:</span><span class="d-inline-block align-middle text-xl font-weight-medium ">{{total}}</span></div>
+    </div>
+    <!-- Buttons-->
+    <hr class="my-2">
+    <div class="row pt-3 pb-5 mb-2">
+        <div class="col-sm-10 mb-3"><a class="tarck-cancel-cart btn btn-style-1 btn-secondary btn-block" (click)="cancel()">Cancel</a></div>
+        <div class="col-sm-2 mb-3"><a class="tarck-add-request btn btn-style-1 btn-primary btn-block" (click)="AddRequest()">+ Add Request</a></div>
+    </div>
+</div>
+<div class="container-empty">
+    <div *ngIf="devices.length==0" class="emptyCart">
+        <p>Your Cart Is Empty</p>
+        <img src="../../../assets/undraw_empty_cart_co35.png"  class="imageEmpty">
+    </div>
+</div>

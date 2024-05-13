@@ -5,6 +5,7 @@ import { AuthService } from '../../services/auth.service';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { User } from '../../models/User';
+import { State } from '../../enum/State';
 
 @Component({
   selector: 'app-requests',
@@ -23,7 +24,46 @@ export class RequestsComponent implements OnInit{
       console.log(error);
     })
   }
-  onValidate(id:number,request:Request){}
-  onRefuse(id:number,request:Request){}
-  onDelete(id:number){}
+  onValidate(request:Request){
+    if(request.state!==State.Valid){
+      request.state=State.Valid
+      this.serviceRequest.updateRequestState(request).subscribe(respnse=>{
+        Swal.fire('Valid!', 'Request has been Validated.', 'success');
+      },(error)=>{
+        Swal.fire('Error!', 'Failed to Validate Request.', 'error');
+      })
+    }else{
+      Swal.fire('Error!', 'Request Already Valid.', 'error');
+    }
+  }
+  onRefuse(request:Request){
+    if(request.state!==State.Rejected){
+      request.state=State.Rejected
+      this.serviceRequest.updateRequestState(request).subscribe(respnse=>{
+        Swal.fire('Rejected!', 'Request has been rejected.', 'success');
+      },(error)=>{
+        Swal.fire('Error!', 'Failed to rejecte Request.', 'error');
+      })
+    }else{
+      Swal.fire('Error!', 'Request Already rejected.', 'error');
+    }
+  }
+  onDelete(id:number){
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'You are about to delete this model. This action cannot be undone.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes',
+      cancelButtonText: 'Cancel'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.serviceRequest.deleteRequest(id).subscribe(response => {
+          Swal.fire('Deleted!', 'Model has been deleted.', 'success');
+        }, error => {
+          Swal.fire('Error!', 'Failed to delete user.', 'error');
+        });
+      }
+    });
+  }
 }

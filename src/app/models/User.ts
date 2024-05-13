@@ -15,6 +15,4 @@ export interface User{
     img:string;
     stateUser:StateUser;
     role:Role;
-    requests:Request[];
-    phones:Device[];
 }

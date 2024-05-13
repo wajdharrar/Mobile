@@ -6,6 +6,8 @@ import { MyRequestsComponent } from './my-requests/my-requests.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { UpdateProfileComponent } from './profile/update-profile/update-profile.component';
+import { DetailsRequestClientComponent } from './my-requests/details-request-client/details-request-client.component';
+import { UpdateRequestClientComponent } from './my-requests/update-request-client/update-request-client.component';
 
 
 
@@ -15,6 +17,8 @@ import { UpdateProfileComponent } from './profile/update-profile/update-profile.
     ProfileComponent,
     MyRequestsComponent,
     UpdateProfileComponent,
+    DetailsRequestClientComponent,
+    UpdateRequestClientComponent,
   ],
   imports: [
     CommonModule,

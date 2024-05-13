@@ -23,8 +23,9 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
 import { ClientModuleModule } from './client/client-module.module';
 import { ProviderModuleModule } from './provider/provider-module.module';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { CarouselComponent } from './home/carousel/carousel.component';
 import { HomeModuleModule } from './home/home-module.module';
+import { DurationPipe } from './duration.pipe';
+
 
 @NgModule({
   declarations: [

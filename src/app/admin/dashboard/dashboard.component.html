@@ -30,7 +30,7 @@
 				<div class="d-flex align-items-center">
 					<div>
 						<p class="mb-0 text-secondary">Total Orders</p>
-						<h4 class="my-1 text-info">4805</h4>
+						<h4 class="my-1 text-info">{{count}}</h4>
 					</div>
 					<div class="widgets-icons-2 rounded-circle bg-gradient-scooter text-white ms-auto"><i class="fa fa-shopping-cart"></i>
 					</div>
@@ -44,7 +44,7 @@
 			   <div class="d-flex align-items-center">
 				   <div>
 					   <p class="mb-0 text-secondary">Total Revenue</p>
-					   <h4 class="my-1 text-danger">$84,245</h4>
+					   <h4 class="my-1 text-danger">{{total}} DT</h4>
 				   </div>
 				   <div class="widgets-icons-2 rounded-circle bg-gradient-bloody text-white ms-auto"><i class="fa fa-dollar"></i>
 				   </div>
@@ -58,7 +58,7 @@
 			   <div class="d-flex align-items-center">
 				   <div>
 					   <p class="mb-0 text-secondary">Bounce Rate</p>
-					   <h4 class="my-1 text-success">34.6%</h4>
+					   <h4 class="my-1 text-success">{{bounce.metricValue | number: '1.2-2'}} %</h4>
 				   </div>
 				   <div class="widgets-icons-2 rounded-circle bg-gradient-ohhappiness text-white ms-auto"><i class="fa fa-bar-chart"></i>
 				   </div>
@@ -80,6 +80,45 @@
 		   </div>
 		</div>
 	  </div> 
+      <div>
+        <h5>Number Of Users Per Role</h5>
+        <br>
+        <div>
+            <canvas id="doughnutChart"></canvas>
+          </div>
+      </div>
+      <div>
+        <h5>Number Of Requests Per State</h5>
+        <div>
+            <canvas id="doughnutChartState"></canvas>
+        </div>
+      </div>
+      <div class="hist-item">
+        <h5>Number Of Requests Per Device</h5>
+        <div>
+            <canvas id="devicePieChart"></canvas>
+        </div>
+    </div>
+    <div class="hist-item">
+        <h5>Number Of Requests Per Brand</h5>
+        <div>
+            <canvas id="brandPieChart"></canvas>
+        </div>
+    </div>
+    <div class="chart-container">
+        <div class="hist-item">
+            <h5>Number Of Requests Per Device Type</h5>
+            <div style="width: 400px;">
+                <canvas id="deviceTypeChart" width="400" height="400"></canvas>
+            </div>
+        </div>
+        <div class="hist-item">
+            <h5>Number Of Requests Per Partner</h5>
+            <div style="width: 400px;">
+                <canvas id="partnerChart" width="400" height="400"></canvas>
+            </div>
+        </div>
+    </div>
 	</div>
 </div>
                 </div>
@@ -97,13 +136,35 @@
                                 <canvas id="analyticsChart" width="400" height="400"></canvas>
                             </div>
                         </div>
-                        <div class="hist-item">
-                            <h5>Number Of Events Per Page</h5>
-                            <div style="width: 400px;">
-                                <canvas id="analyticsChartPage" width="400" height="400"></canvas>
-                            </div>
+                        <div class="table-responsive col-lg-12">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th id="click-me">path</th>
+                                        <th>Views</th>
+                                        <th>Number of events</th>
+                                        <th class="toggleDisplay">Engagement rate</th>
+                                        <th class="toggleDisplay">Average time spent</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let page of displayedPages; let i=index">
+                                        <th scope="row">{{ i + 1 + pageSize * currentPage }}</th>
+                                        <td><a [href]="page.dimensionValues">{{ page.dimensionValues }}</a></td>
+                                        <td>{{ page.metricValue }}</td>
+                                        <td>{{page.eventCount}}</td>
+                                        <td class="toggleDisplay">{{ page.engagementRate | number: '1.2-2' }}</td>
+                                        <td class="toggleDisplay">{{ page.averageSessionDuration | duration }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
-                    </div>    
+                        <div>
+                            <button [disabled]="currentPage == 0" (click)="prevPage()">Previous</button>
+                            <button [disabled]="currentPage >= maxPage" (click)="nextPage()">Next</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>    
@@ -119,6 +180,34 @@
                                 <canvas id="analyticsPieChart" width="400" height="400"></canvas>
                             </div>
                         </div>
+                        <div>
+                            <h5>Number Of users Per City over time</h5>
+                         <div style="width: 400px;">
+                            <canvas id="cityTimeChart" width="300" height="300"></canvas>
+                         </div>  
+                        </div>
+                        <div class="table-responsive col-lg-12">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>City</th>
+                                        <th>Users</th>
+                                        <th>New Users</th>
+                                        <th>Engaged session</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let s of scroll; let i=index">
+                                        <th scope="row">{{i + 1}}</th>
+                                        <td>{{s.dimensionValues}}</td>
+                                        <td>{{s.metricValue }}</td>
+                                        <td>{{s.newUsers}}</td>
+                                        <td>{{s.engagedSessions }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>                                                  
                     </div>    
                 </div>
             </div>

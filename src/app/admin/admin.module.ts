@@ -28,6 +28,8 @@ import { UpdateProfileAdminComponent } from './profile-admin/update-profile-admi
 import { AddDeviceComponent } from './devices/add-device/add-device.component';
 import { UpdateDeviceComponent } from './devices/update-device/update-device.component';
 import { DetailsDeviceComponent } from './devices/details-device/details-device.component';
+import { DetailsRequestComponent } from './requests/details-request/details-request.component';
+import { DurationPipe } from '../duration.pipe';
 
 
 
@@ -58,7 +60,9 @@ import { DetailsDeviceComponent } from './devices/details-device/details-device.
     DevicesComponent,
     UpdateProfileAdminComponent,
     UpdateDeviceComponent,
-    DetailsDeviceComponent
+    DetailsDeviceComponent,
+    DetailsRequestComponent,
+    DurationPipe
   ],
   imports: [
     CommonModule,

@@ -60,6 +60,11 @@ import { UpdateModelProviderComponent } from './provider/provider-product/update
 import { AddVersionProviderComponent } from './provider/provider-product/add-version-provider/add-version-provider.component';
 import { DetailsVersionProviderComponent } from './provider/provider-product/details-version-provider/details-version-provider.component';
 import { UpdateVersionProviderComponent } from './provider/provider-product/update-version-provider/update-version-provider.component';
+import { CartComponent } from './home/cart/cart.component';
+import { AddDocumentComponent } from './home/add-document/add-document.component';
+import { DetailsRequestClientComponent } from './client/my-requests/details-request-client/details-request-client.component';
+import { UpdateRequestClientComponent } from './client/my-requests/update-request-client/update-request-client.component';
+import { DetailsRequestComponent } from './admin/requests/details-request/details-request.component';
 
 const routes: Routes = [
   {
@@ -82,6 +87,14 @@ const routes: Routes = [
       {
         path:'details/:id',
         component:DetailsDeviceComponent,
+      },
+      {
+        path:'cart',
+        component:CartComponent
+      },
+      {
+        path:'document/:id',
+        component:AddDocumentComponent
       },
   ]
   },
@@ -143,6 +156,10 @@ const routes: Routes = [
       {
         path:'requests',
         component:RequestsComponent,
+      },
+      {
+        path:'requests/details/:id',
+        component:DetailsRequestClientComponent,
       },
       {
         path:'product',
@@ -234,6 +251,14 @@ const routes: Routes = [
         component:ClientDashboardComponent,
       },
       {
+        path:'requests/details/:id',
+        component:DetailsRequestClientComponent,        
+      },
+      {
+        path:'requests/update/:id',
+        component:UpdateRequestClientComponent,        
+      },
+      {
         path:'requests',
         component:MyRequestsComponent,        
       },
@@ -321,6 +346,10 @@ const routes: Routes = [
       {
         path:'requests',
         component:ProviderRequestsComponent,
+      },
+      {
+        path:'requests/details/:id',
+        component:DetailsRequestClientComponent,
       }
     ]
   }

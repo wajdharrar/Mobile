@@ -1,0 +1,75 @@
+<div class="container-fluid">
+
+    <div class="container">
+      <!-- Title -->
+      <div class="d-flex justify-content-between align-items-center py-3">
+        <h2 class="h5 mb-0"><a href="#" class="text-muted"></a> Request #{{request.idRequest}}</h2>
+      </div>
+    
+      <!-- Main content -->
+      <div class="row">
+        <div class="col-lg-8">
+          <!-- Details -->
+          <div class="card mb-4">
+            <div class="card-body">
+              <div class="mb-3 d-flex justify-content-between">
+                <div>
+                  <span class="me-3">{{ request.date | date: 'yyyy-MM-dd' }}</span>
+                </div>
+              </div>
+              <table class="table table-borderless">
+                <tbody>
+                  <tr *ngFor="let device of devices">
+                    <td>
+                      <div class="d-flex mb-2">
+                        <div class="flex-shrink-0">
+                          <img src="{{device.imgDevice}}" alt="" width="35" class="img-fluid">
+                        </div>
+                        <div class="flex-lg-grow-1 ms-3">
+                          <h6 class="small mb-0"><a href="#" class="text-reset">{{device.nameDevice}}</a></h6>
+                          <span class="small">Color: {{device.color}}</span>
+                        </div>
+                      </div>
+                    </td>
+                    <td>1</td>
+                    <td class="text-end">{{device.price}} DT</td>
+                  </tr>
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <td colspan="2">Initial Payment</td>
+                    <td class="text-end">{{request.initialPayment}}</td>
+                  </tr>
+                  <tr>
+                    <td colspan="2">Repayment</td>
+                    <td class="text-end">{{request.repayement}}</td>
+                  </tr>
+                  <tr>
+                    <td colspan="2">Warranty</td>
+                    <td class="text-danger text-end">{{request.warranty}} years</td>
+                  </tr>
+                  <tr class="fw-bold">
+                    <td colspan="2">TOTAL</td>
+                    <td class="text-end">$169,98</td>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+          </div>
+            <!-- Shipping information -->
+            <div class="card mb-4">
+                <div class="card-body">
+                <strong>Documents</strong>
+                    <span><a class="text-decoration-underline"></a></span>
+                <hr>
+                <a [href]="getFileUrl(documents.nationalId)" download> National Id</a><br>
+                <a [href]="getFileUrl(documents.birthCertificate)" download>Birth Certificate</a><br>
+                <a [href]="getFileUrl(documents.proofOfEmployement)" download>Proof Of Employement</a><br>
+                <a [href]="getFileUrl(documents.proofOfIncome)" download>Proof Of Income</a><br>
+                <a [href]="getFileUrl(documents.bankStatement)" download>Bank Statement</a><br>
+                <a [href]="getFileUrl(documents.taxReturn)" download>Tax Return</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>

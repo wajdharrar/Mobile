@@ -3,7 +3,7 @@
 	<div class="title">
 		<h1>Manage Requests</h1>
 	</div>
-	<div class="row" *ngIf="requests==undefined">
+	<div class="row" *ngIf="requests!=undefined">
 	<div class="col-lg-12">
 		<div class="main-box clearfix">
 			<div class="table-responsive">
@@ -13,24 +13,19 @@
 							<th class="text-center"><span>User</span></th>
 							<th class="text-center"><span>Start Date</span></th>
 							<th class="text-center"><span>Status</span></th>
-							<th class="text-center"><span>Borower Type</span></th>
 							<th class="text-center"><span>Action</span></th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr *ngFor="let request of requests">
 							<td>
-								<img src={{request.user.img}} alt="">
-								<a href="#" class="user-link">{{request.user.name}} {{request.user.lastName}}</a>
+								<img src="{{request.user.img}}"/>
 							</td>
 							<td>
 								{{request.date}}
 							</td>
 							<td class="text-center">
 								<span class="label label-default">{{request.state}}</span>
-							</td>
-							<td>
-								<a href="#">{{request.borrowerType}}</a>
 							</td>
 							<td style="width: 20%;">
 								<a [routerLink]="'details/' + request.idRequest"  class="table-link">
@@ -39,19 +34,13 @@
 										<i class="fa fa-search-plus fa-stack-1x fa-inverse"></i>
 									</span>
 								</a>
-								<a [routerLink]="'update/' + request.idRequest" class="table-link">
-									<span class="fa-stack">
-										<i class="fa fa-square fa-stack-2x"></i>
-										<i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
-									</span>
-								</a>
-								<a class="table-link" (click)="onValidate(request.idRequest,request)">
+								<a class="table-link" (click)="onValidate(request)">
 									<span class="fa-stack">
 										<i class="fa fa-square fa-stack-2x"></i>
 										<i class="fa fa-check fa-stack-1x fa-inverse"></i>
 									</span>
 								</a>
-								<a  class="table-link danger" (click)="onRefuse(request.idRequest,request)">
+								<a  class="table-link danger" (click)="onRefuse(request)">
 									<span class="fa-stack">
 										<i class="fa fa-square fa-stack-2x"></i>
 										<i class="fa fa-ban fa-stack-1x fa-inverse"></i>

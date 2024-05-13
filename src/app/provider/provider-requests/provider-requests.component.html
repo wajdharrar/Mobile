@@ -1,1 +1,58 @@
-<p>provider-requests works!</p>
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<div class="container">
+	<div class="title">
+		<h1>Manage Requests</h1>
+	</div>
+	<div class="row" *ngIf="requests!=undefined">
+	<div class="col-lg-12">
+		<div class="main-box clearfix">
+			<div class="table-responsive">
+				<table class="table user-list">
+					<thead>
+						<tr>
+							<th class="text-center"><span>User</span></th>
+							<th class="text-center"><span>Start Date</span></th>
+							<th class="text-center"><span>Status</span></th>
+							<th class="text-center"><span>Action</span></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr *ngFor="let request of requests">
+							<td>
+								<img src="{{request.user.img}}"/>
+							</td>
+							<td class="text-center">
+								{{request.date}}
+							</td>
+							<td class="text-center">
+								<span class="label label-default">{{request.state}}</span>
+							</td>
+							<td class="text-center" style="width: 5%;">
+								<a [routerLink]="'details/' + request.idRequest"  class="table-link">
+									<span class="fa-stack">
+										<i class="fa fa-square fa-stack-2x"></i>
+										<i class="fa fa-search-plus fa-stack-1x fa-inverse"></i>
+									</span>
+								</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<ul class="pagination pull-right">
+				<li><a href="#"><i class="fa fa-chevron-left"></i></a></li>
+				<li><a href="#">1</a></li>
+				<li><a href="#">2</a></li>
+				<li><a href="#">3</a></li>
+				<li><a href="#">4</a></li>
+				<li><a href="#">5</a></li>
+				<li><a href="#"><i class="fa fa-chevron-right"></i></a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+</div>
+<div *ngIf="requests.length==0" class="alert alert-info" role="alert">
+	<h4 class="alert-heading">No Requests !</h4>
+	Requests List Is Empty
+</div>

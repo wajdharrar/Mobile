@@ -34,4 +34,27 @@ export class FileService {
       })
     );
   }
+  uploadDoc(file: File, id: number, type: string): Observable<number> {
+    const formData = new FormData();
+    formData.append("file", file);
+
+    return this.http.post<any>(`${this.apiServerUrl}/doc/${id}/${type}`, formData, {
+      reportProgress: true,
+      observe: "events"
+    }).pipe(
+      map((event: HttpEvent<any>) => {
+        if (event.type === HttpEventType.UploadProgress && event.total) {
+          const percentDone = Math.round((event.loaded / event.total) * 100);
+          return percentDone;
+        } else if (event.type === HttpEventType.Response) {
+          return 100;
+        }
+        return 0; 
+      }),
+      catchError((error: HttpErrorResponse) => {
+        console.error('Error uploading file:', error);
+        return throwError(error); 
+      })
+    );
+  }
 }

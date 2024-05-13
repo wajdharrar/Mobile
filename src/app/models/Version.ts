@@ -8,7 +8,6 @@ export interface Version {
     descVersion: string;
     state: State;
     reason: string;
-    brand: Brand;
     idPartner:number;
     namePartner:string;
 }

@@ -1,0 +1,87 @@
+<div class="container-add-document">
+    <div class="container-request col-lg-10 card mb-4">
+        <h5 class="font-size-16 me-3 col-lg-12 mb-5 text-center">Payement Information</h5>
+        <div class="">
+            <label class="label" for="brandSelected">Warranty</label>
+            <div class="form-group">
+                <input type="range" [(ngModel)]="warranty" (change)="onWarrantyChange()" min="1" max="5" value="1" class="slider" id="myRange">
+                <div class="tick-container">
+                    <span>1</span>
+                    <span>2</span>
+                    <span>3</span>
+                    <span>4</span>
+                    <span>5</span>
+                </div>
+            </div>
+        </div>
+        <div class="">
+            <label class="label" for="brandSelected">Initial Payement %</label>
+            <div class="form-group">
+                <input type="range" [(ngModel)]="percentage" (change)="onPercentageChange()" min="10" max="50" value="10" class="slider" id="myRange">
+                <div class="tick-container">
+                    <span>0.1</span>
+                    <span>0.2</span>
+                    <span>0.3</span>
+                    <span>0.4</span>
+                    <span>0.5</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-5 mt-5">
+            <label class="label" for="brandSelected">Initial Payment :         </label>
+            {{initialPayment.toFixed(1)}} DT
+        </div>
+        <div class="col-lg-5 mt-5">
+            <label class="label" for="brandSelected">Repayment Per Mounth:         </label>
+            {{repayment.toFixed(1)}} DT
+        </div>
+    </div>
+    <div class="d-flex flex-wrap">
+        <h5 class="font-size-16 me-3">Add Your Documents</h5>
+    </div>
+    <hr class="mt-2">
+    <div class="table-responsive col-lg-11">
+        <table class="table align-middle table-nowrap table-hover mb-0">
+            <thead class="table-light">
+                <tr>
+                  <th scope="col">Name</th>
+                  <th scope="col">Download</th>
+                </tr>
+              </thead>
+            <tbody>
+                <tr>
+                    <td><a href="javascript: void(0);" class="text-dark fw-medium"><i class="mdi mdi-file-document font-size-16 align-middle text-primary me-2"></i>National Id</a></td>
+                    <td><input id="img" [(ngModel)]="nationalId" class="form-control form-control-lg" type="file" (change)="onFileSelected($event,nationalId,'nationalId')" required [ngModelOptions]="{standalone: true}" placeholder="Choose file"></td>
+                </tr>
+                <tr>
+                    <td><a href="javascript: void(0);" class="text-dark fw-medium"><i class="mdi mdi-file-document font-size-16 align-middle text-primary me-2"></i>Birth Certificate</a></td>
+                    <td><input id="img" [(ngModel)]="birthCertificate" class="form-control form-control-lg" type="file" (change)="onFileSelected($event,birthCertificate,'birthCertificate')" required [ngModelOptions]="{standalone: true}" placeholder="Choose file"></td>
+                </tr>
+                <tr>
+                    <td><a href="javascript: void(0);" class="text-dark fw-medium"><i class="mdi mdi-file-document font-size-16 align-middle text-primary me-2"></i>Proof Of Income</a></td>
+                    <td><input id="img" [(ngModel)]="proofOfIncome" class="form-control form-control-lg" type="file" (change)="onFileSelected($event,proofOfIncome,'proofOfIncome')" required [ngModelOptions]="{standalone: true}" placeholder="Choose file"></td>
+                </tr>
+                <tr>
+                    <td><a href="javascript: void(0);" class="text-dark fw-medium"><i class="mdi mdi-file-document font-size-16 align-middle text-primary me-2"></i>Proof Of Employement</a></td>
+                    <td><input id="img" [(ngModel)]="proofOfEmployement" class="form-control form-control-lg" type="file" (change)="onFileSelected($event,proofOfEmployement,'proofOfEmployement')" required [ngModelOptions]="{standalone: true}" placeholder="Choose file"></td>
+                </tr>
+                <tr>
+                    <td><a href="javascript: void(0);" class="text-dark fw-medium"><i class="mdi mdi-file-document font-size-16 align-middle text-primary me-2"></i>Tax Return</a></td>
+                    <td><input id="img" [(ngModel)]="taxReturn" class="form-control form-control-lg" type="file" (change)="onFileSelected($event,taxReturn,'taxReturn')" required [ngModelOptions]="{standalone: true}" placeholder="Choose file"></td>
+                </tr>
+                <tr>
+                    <td><a href="javascript: void(0);" class="text-dark fw-medium"><i class="mdi mdi-file-document font-size-16 align-middle text-primary me-2"></i>Bank Statement</a></td>
+                    <td><input id="img" [(ngModel)]="bankStatement" class="form-control form-control-lg" type="file" (change)="onFileSelected($event,bankStatement,'bankStatement')" required [ngModelOptions]="{standalone: true}" placeholder="Choose file"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>    
+    <div class="row pt-3 pb-5 mb-2 col-lg-12 mt-5 move">
+        <div class="col-sm-10 mb-3 ml-5">
+            <a  class="btn btn-style-1 btn-secondary btn-block" (click)="cancel()">Cancel</a>
+        </div>
+        <div class="col-sm-2 mb-3">
+            <a class="btn btn-style-1 btn-primary btn-block" (click)="validate()">+ Validate</a>
+        </div>
+    </div>
+</div>

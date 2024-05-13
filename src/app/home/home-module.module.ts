@@ -7,6 +7,9 @@ import { CarouselComponent } from './carousel/carousel.component';
 import { ProductBoxComponent } from './product-box/product-box.component';
 import { DeviceTypeComponent } from './device-type/device-type.component';
 import { DetailsDeviceComponent } from './details-device/details-device.component';
+import { CartComponent } from './cart/cart.component';
+import { AddDocumentComponent } from './add-document/add-document.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -19,10 +22,14 @@ import { DetailsDeviceComponent } from './details-device/details-device.componen
     ProductBoxComponent,
     DeviceTypeComponent,
     DetailsDeviceComponent,
+    CartComponent,
+    AddDocumentComponent,
 
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    ReactiveFormsModule,
+    FormsModule
   ]
 })
 export class HomeModuleModule { }
