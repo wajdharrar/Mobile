@@ -1,1 +1,64 @@
-<p>client-dashboard works!</p>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css">
+<div class="title">
+    <h1>View Analysis</h1>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-3">
+            <h5>Number Of Requests By State</h5>
+            <br>
+            <div>
+                <canvas id="doughnutChartState"></canvas>
+            </div>
+        </div>
+        <div class="col-sm-9">
+            <h5>Top 5 Devices</h5>
+        <div class="table-responsive col-lg-12">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Purches</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let device of devices; let i=index">
+                        <th scope="row">{{i + 1}}</th>
+                        <td>{{device.id}}</td>
+                        <td>{{device.name }}</td>
+                        <td>{{device.purchases}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        </div>
+    </div>
+    <h5>Recomended</h5>
+            <br>
+            <div class="row" style="margin-top: 5%;">
+                <div *ngFor="let device of devicesRec" class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="card product_item">
+                        <div class="body">
+                            <div class="cp_img">
+                                <a href="home/details/{{device.idDevice}}"><img src="{{device.imgDevice}}" alt="Product" class="img-fluid"></a>
+                                <div class="hover">
+                                    <a (click)="addToCart(device)"class="tarck-add-to-cart btn btn-primary btn-sm waves-effect"><i class="zmdi zmdi-plus"></i></a>
+                                    <a href="home/cart" class="btn btn-primary btn-sm waves-effect"><i class="zmdi zmdi-shopping-cart"></i></a>
+                                </div>
+                            </div>
+                            <div class="product_details">
+                                <h5><a href="home/details/{{device.idDevice}}">{{device.nameDevice}}</a></h5>
+                                <ul class="product_price list-unstyled">
+                                    <li class="old_price">{{device.price}} DT</li>
+                                    <li class="new_price">{{((device.price-1)*01/7).toFixed(3)}} DT</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+</div>
+
+                                                  

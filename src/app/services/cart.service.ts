@@ -16,6 +16,9 @@ export class CartService {
   getByIdRequest(request:Request): Observable<Cart[]> {
     return this.http.post<Cart[]>(`${this.apiServerUrl}/request`,request);
   }
+  getTopRequestedDevicesForCurrentWeek(): Observable<any> {
+    return this.http.get<any>(`${this.apiServerUrl}/top`);
+  }
   deleteCart(items:Cart[]):Observable<void>{
     return this.http.post<void>(`${this.apiServerUrl}/delete`,items)
    }

@@ -7,13 +7,10 @@
         <div class="profile-head">
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item">
-                    <a class="nav-link" [routerLink]="['./']" fragment="global" (click)="switchTab('global')" role="tab" [class.active]="activeTab === 'global'">Global Analyses</a>
+                    <a class="nav-link" [routerLink]="['./']" fragment="product" (click)="switchTab('product')" role="tab" [class.active]="activeTab === 'product'">Devices</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" [routerLink]="['./']" fragment="user" (click)="switchTab('user')" role="tab" [class.active]="activeTab === 'user'">User Behaviour</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" [routerLink]="['./']" fragment="demo" (click)="switchTab('demo')" role="tab" [class.active]="activeTab === 'demo'">Demographics</a>
+                    <a class="nav-link" [routerLink]="['./']" fragment="request" (click)="switchTab('request')" role="tab" [class.active]="activeTab === 'request'">Requests</a>
                 </li>
             </ul>
         </div>
@@ -21,67 +18,58 @@
     <div class="row">
         <div class="col-md-11">
             <div class="tab-content profile-tab" id="myTabContent">
-                <div *ngIf="activeTab === 'global'" class="tab-pane fade show active" id="global" role="tabpanel" aria-labelledby="global">
-<div class="container">
-<div class="row row-cols-1 row-cols-md-2 row-cols-xl-4">
-       <div class="col">
-		 <div class="card radius-10 border-start border-0 border-3 border-info">
-			<div class="card-body">
-				<div class="d-flex align-items-center">
-					<div>
-						<p class="mb-0 text-secondary">Total Orders</p>
-						<h4 class="my-1 text-info">4805</h4>
-					</div>
-					<div class="widgets-icons-2 rounded-circle bg-gradient-scooter text-white ms-auto"><i class="fa fa-shopping-cart"></i>
-					</div>
-				</div>
-			</div>
-		 </div>
-	   </div>
-	   <div class="col">
-		<div class="card radius-10 border-start border-0 border-3 border-danger">
-		   <div class="card-body">
-			   <div class="d-flex align-items-center">
-				   <div>
-					   <p class="mb-0 text-secondary">Total Revenue</p>
-					   <h4 class="my-1 text-danger">$84,245</h4>
-				   </div>
-				   <div class="widgets-icons-2 rounded-circle bg-gradient-bloody text-white ms-auto"><i class="fa fa-dollar"></i>
-				   </div>
-			   </div>
-		   </div>
-		</div>
-	  </div>
-	  <div class="col">
-		<div class="card radius-10 border-start border-0 border-3 border-success">
-		   <div class="card-body">
-			   <div class="d-flex align-items-center">
-				   <div>
-					   <p class="mb-0 text-secondary">Bounce Rate</p>
-					   <h4 class="my-1 text-success">34.6%</h4>
-				   </div>
-				   <div class="widgets-icons-2 rounded-circle bg-gradient-ohhappiness text-white ms-auto"><i class="fa fa-bar-chart"></i>
-				   </div>
-			   </div>
-		   </div>
-		</div>
-	  </div>
-	  <div class="col">
-		<div class="card radius-10 border-start border-0 border-3 border-warning">
-		   <div class="card-body">
-			   <div class="d-flex align-items-center">
-				   <div>
-					   <p class="mb-0 text-secondary">Total Customers</p>
-					   <h4 class="my-1 text-warning">{{analytics.metricValue}}</h4>
-				   </div>
-				   <div class="widgets-icons-2 rounded-circle bg-gradient-blooker text-white ms-auto"><i class="fa fa-users"></i>
-				   </div>
-			   </div>
-		   </div>
-		</div>
-	  </div> 
-	</div>
-</div>
+                <div *ngIf="activeTab === 'product'" class="tab-pane fade show active" id="product" role="tabpanel" aria-labelledby="product">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <h5>Number Of Brands By<br> State</h5>
+                            <br>
+                            <div>
+                                <canvas id="doughnutChart"></canvas>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <h5>Number Of Models By<br> State</h5>
+                            <br>
+                            <div>
+                                <canvas id="doughnutChartModel"></canvas>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <h5>Number Of Versions By State</h5>
+                            <br>
+                            <div>
+                                <canvas id="doughnutChartVersion"></canvas>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <h5>Number Of Devices By State</h5>
+                            <br>
+                            <div>
+                                <canvas id="doughnutChartDevice"></canvas>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <h5>Number Of Devices By Brand</h5>
+                            <br>
+                            <div>
+                                <canvas id="deviceBrandChart"></canvas>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <h5>Number Of Devices By Model</h5>
+                            <br>
+                            <div>
+                                <canvas id="deviceModelChart"></canvas>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <h5>Number Of Devices By Device Type</h5>
+                            <br>
+                            <div>
+                                <canvas id="chartDeviceType"></canvas>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>    
@@ -89,18 +77,73 @@
     <div class="row">
         <div class="col-md-11">
             <div class="tab-content profile-tab" id="myTabContent">
-                <div *ngIf="activeTab === 'user'" class="tab-pane fade show active" id="user" role="tabpanel" aria-labelledby="user-tab">
-                    <div class="hist">
-                        <div class="hist-item">
-                            <h5>Number Of Events By Event Name</h5>
-                            <div style="width: 400px;">
-                                <canvas id="analyticsChart" width="400" height="400"></canvas>
-                            </div>
+                <div *ngIf="activeTab === 'request'" class="tab-pane fade show active" id="request" role="tabpanel" aria-labelledby="request-tab">
+                    <div class="container">
+                        <div class="row row-cols-1 row-cols-md-2 row-cols-xl-2">
+                               <div class="col">
+                                 <div class="card radius-10 border-start border-0 border-3 border-info">
+                                    <div class="card-body">
+                                        <div class="d-flex align-items-center">
+                                            <div>
+                                                <p class="mb-0 text-secondary">Total Orders</p>
+                                                <h4 class="my-1 text-info">{{totalRequests}}</h4>
+                                            </div>
+                                            <div class="widgets-icons-2 rounded-circle bg-gradient-scooter text-white ms-auto"><i class="fa fa-shopping-cart"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                 </div>
+                               </div>
+                               <div class="col">
+                                <div class="card radius-10 border-start border-0 border-3 border-danger">
+                                   <div class="card-body">
+                                       <div class="d-flex align-items-center">
+                                           <div>
+                                               <p class="mb-0 text-secondary">Total Revenue</p>
+                                               <h4 class="my-1 text-danger">{{total | number: '1.2-2'}} DT</h4>
+                                           </div>
+                                           <div class="widgets-icons-2 rounded-circle bg-gradient-bloody text-white ms-auto"><i class="fa fa-dollar"></i>
+                                           </div>
+                                       </div>
+                                   </div>
+                                </div>
+                              </div>
                         </div>
-                        <div class="hist-item">
-                            <h5>Number Of Events Per Page</h5>
-                            <div style="width: 400px;">
-                                <canvas id="analyticsChartPage" width="400" height="400"></canvas>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h5>Number Of Requests By Brand</h5>
+                                <br>
+                                <div>
+                                    <canvas id="pieBrand"></canvas>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <h5>Number Of Requests By Model</h5>
+                                <br>
+                                <div>
+                                    <canvas id="pieModel"></canvas>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <h5>Number Of Requests By Version</h5>
+                                <br>
+                                <div>
+                                    <canvas id="pieVersion"></canvas>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <h5>Number Of Requests By Device</h5>
+                                <br>
+                                <div>
+                                    <canvas id="pieDevice"></canvas>
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <h5>Number Of Requests By Device Type</h5>
+                                <br>
+                                <div>
+                                    <canvas id="barDeviceType"></canvas>
+                                </div>
                             </div>
                         </div>
                     </div>    
@@ -108,20 +151,4 @@
             </div>
         </div>    
     </div>  
-    <div class="row">
-        <div class="col-md-11">
-            <div class="tab-content profile-tab" id="myTabContent">
-                <div *ngIf="activeTab === 'demo'" class="tab-pane fade show active" id="demo" role="tabpanel" aria-labelledby="demo-tab">
-                    <div class="hist">
-                        <div class="hist-item">
-                            <h5>Number Of Sessions Per City</h5>
-                            <div style="width: 400px;">
-                                <canvas id="analyticsPieChart" width="400" height="400"></canvas>
-                            </div>
-                        </div>
-                    </div>    
-                </div>
-            </div>
-        </div>    
-    </div> 
 </div>

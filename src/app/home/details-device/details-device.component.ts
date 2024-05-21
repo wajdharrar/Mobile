@@ -6,6 +6,7 @@ import { Version } from '../../models/Version';
 import { FeatureService } from '../../services/feature.service';
 import { FeatureValueString } from '../../models/tools/FeatureValueString';
 import { FeatureVersionService } from '../../services/feature-version.service';
+import { GoogleAnalyticsService } from '../../services/google-analytics.service';
 
 @Component({
   selector: 'app-details-device',
@@ -22,6 +23,7 @@ export class DetailsDeviceComponent implements OnInit {
     private deviceService: DeviceService,
     private route: ActivatedRoute,
     private featureService: FeatureService,
+    private googleAnalyticService:GoogleAnalyticsService,
     private featureVersionService: FeatureVersionService
   ) { }
 
@@ -48,5 +50,15 @@ export class DetailsDeviceComponent implements OnInit {
         });
       });
     });
+  }
+  addToCart(device:Device){
+    this.trackClick(device)
+    localStorage.setItem(device.nameDevice,device.idDevice.toString())
+  }
+  trackClick(product:Device){
+    const buttons = document.querySelector('.tarck-add-to-cart')
+    buttons.addEventListener('click',()=>{
+      this.googleAnalyticService.trackEvent('Add to cart',product.nameDevice,product.nameDevice)
+    })
   }
 }

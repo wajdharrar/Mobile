@@ -81,6 +81,7 @@ export class AddDeviceComponent {
       idProvider: 0, // Initialize with appropriate default value
       idDevice: 0, // Initialize with appropriate default value
     },
+    createdAt:''
   };
   deviceTypes!:DeviceType[];
   deviceTypeSelected:number;
@@ -155,6 +156,7 @@ export class AddDeviceComponent {
     })
   }
   OnSave(){
+    const today: Date = new Date();
         this.deviceService.addDevice(this.device).subscribe(response=>{
           console.log(response);
           this.deviceAdded=response
@@ -170,6 +172,7 @@ export class AddDeviceComponent {
             console.log(this.partner)
             this.providerDevice.id.idProvider=response.idProvider
             this.providerDevice.id.idDevice=this.deviceAdded.idDevice
+            this.providerDevice.createdAt=today.toISOString().substring(0, 10)
             console.log(this.providerDevice)
             this.providerDeviceService.add(this.providerDevice).subscribe(response=>{
               console.log(response)

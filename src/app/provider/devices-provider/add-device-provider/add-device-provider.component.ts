@@ -81,6 +81,7 @@ export class AddDeviceProviderComponent {
         idProvider: 0, // Initialize with appropriate default value
         idDevice: 0, // Initialize with appropriate default value
       },
+      createdAt:''
     };
     constructor(
       private route:Router,
@@ -149,6 +150,7 @@ export class AddDeviceProviderComponent {
       })
     }
     OnSave(){
+      const today: Date = new Date();
           this.deviceService.addDevice(this.device).subscribe(response=>{
             console.log(response);
             this.addedDevice=response
@@ -163,6 +165,7 @@ export class AddDeviceProviderComponent {
                   this.IdPartner=response.idProvider
                   this.providerDevice.id.idProvider=this.IdPartner
                   this.providerDevice.id.idDevice=this.addedDevice.idDevice
+                  this.providerDevice.createdAt=today.toISOString().substring(0, 10)
                   this.providerDeviceService.add(this.providerDevice).subscribe(response=>{
                     console.log(response)
                   })

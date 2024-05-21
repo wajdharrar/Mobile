@@ -42,6 +42,7 @@ export class DashboardComponent implements OnInit {
   brand:RequestBrandCount[]
   partner:RequestPartnerCount[]
   doughnutChart: any;
+  purchaseEvents:AnalyticsData[]=[];
   pageSize = 5; // Change this to adjust number of rows per page
   constructor(private googleAnalyticsService: GoogleAnalyticsService, 
     private requestService:RequestService,
@@ -81,7 +82,7 @@ export class DashboardComponent implements OnInit {
       this.total=response
     })
     this.requestService.getCount().subscribe(response=>{
-      console.log(response)
+      console.log(response,'orders')
       this.count=response
     })
     this.requestService.getDeviceCount().subscribe(response=>{
@@ -107,17 +108,33 @@ export class DashboardComponent implements OnInit {
   }
   ngOnInit(): void {
     this.OnGlobal()
-  }
-  onUserBehaviour(){
-    this.analyticsService.getEvents().subscribe(response=>{
-      console.log(response)
-      this.events=response;
-      this.renderChart()
-    });
     this.analyticsService.getPage().subscribe(response=>{
       console.log(response)
       this.pages=response
+      this.updateDisplayedPages()
     })
+  }
+  onUserBehaviour(){
+    this.analyticsService.getEvents().subscribe(response=>{
+      if(this.purchaseEvents.length==0){
+      this.purchaseEvents.push(response.find(event => event.dimensionValues === 'Add request'))
+      this.purchaseEvents.push(response.find(event => event.dimensionValues === 'Cancel cart'))
+      this.purchaseEvents.push(response.find(event => event.dimensionValues === 'Add to cart'))
+      }
+      this.events = response.filter(event =>
+        event.dimensionValues !== 'Cancel cart' &&
+        event.dimensionValues !== 'Add to cart' &&
+        event.dimensionValues !== 'Add request'
+      );
+      console.log(this.events, 'filtered events');
+      console.log(this.purchaseEvents, 'specific');
+      this.renderChart();
+      this.renderDoughnutChartPurchase();
+    });
+    /*this.analyticsService.getPage().subscribe(response=>{
+      console.log(response)
+      this.pages=response
+    })*/
   }
   ondemographics(){
     this.analyticsService.getBuyer().subscribe(response=>{
@@ -561,6 +578,54 @@ export class DashboardComponent implements OnInit {
       };
   
       const ctx = document.getElementById('doughnutChartState') as HTMLCanvasElement;
+      this.doughnutChart = new Chart(ctx, {
+        type: 'doughnut',
+        data: data,
+      });
+    }
+    renderDoughnutChartPurchase() {
+      console.log(this.purchaseEvents,'purchase')
+      const labels = this.purchaseEvents.map(purchase => purchase.dimensionValues);
+      const counts = this.purchaseEvents.map(purchase => purchase.metricValue);
+  
+      const data = {
+        labels: labels,
+        datasets: [{
+          data: counts,
+          backgroundColor: [
+            'rgba(255, 99, 132, 0.5)',
+            'rgba(54, 162, 235, 0.5)',
+            'rgba(255, 206, 86, 0.5)',
+            'rgba(75, 192, 192, 0.5)',
+            'rgba(153, 102, 255, 0.5)',
+            'rgba(255, 159, 64, 0.5)'
+          ],
+          borderColor: [
+            'rgba(255, 99, 132, 1)',
+            'rgba(54, 162, 235, 1)',
+            'rgba(255, 206, 86, 1)',
+            'rgba(75, 192, 192, 1)',
+            'rgba(153, 102, 255, 1)',
+            'rgba(255, 159, 64, 1)'
+          ],
+          borderWidth: 1
+        }]
+      };
+  
+      const options = {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: 'top',
+          },
+          title: {
+            display: true,
+            text: 'Users by Role'
+          }
+        }
+      };
+  
+      const ctx = document.getElementById('doughnutChartPurchase') as HTMLCanvasElement;
       this.doughnutChart = new Chart(ctx, {
         type: 'doughnut',
         data: data,

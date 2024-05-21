@@ -22,6 +22,9 @@ export class ModelService {
   getModel(id:number): Observable<any> {
     return this.http.get<Model>(`${this.apiServerUrl}/${id}`);
   }
+  countModelsByState(id:number): Observable<any> {
+    return this.http.get<any>(`${this.apiServerUrl}/count/state/${id}`);
+  }
   addModel(model:any):Observable<Model>{
     return this.http.post<Model>(`${this.apiServerUrl}/add`,model)
   }

@@ -136,7 +136,15 @@
                                 <canvas id="analyticsChart" width="400" height="400"></canvas>
                             </div>
                         </div>
-                        <div class="table-responsive col-lg-12">
+                        <div class="hist-item">
+                            <h5>Purchase events Count</h5>
+                            <br>
+                            <div>
+                                <canvas id="doughnutChartPurchase"></canvas>
+                              </div>
+                          </div>
+                        <div>
+                        <div class="table-responsive col-lg-12" *ngIf="displayedPages.length!=0">
                             <table class="table table-bordered">
                                 <thead>
                                     <tr>

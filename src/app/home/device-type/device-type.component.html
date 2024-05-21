@@ -61,8 +61,8 @@
                     <div class="cp_img">
                         <a href="home/details/{{device.idDevice}}"><img src="{{device.imgDevice}}" alt="Product" class="img-fluid"></a>
                         <div class="hover">
-                            <a href="javascript:void(0);" class="btn btn-primary btn-sm waves-effect"><i class="zmdi zmdi-plus"></i></a>
-                            <a href="javascript:void(0);" class="btn btn-primary btn-sm waves-effect"><i class="zmdi zmdi-shopping-cart"></i></a>
+                            <a (click)="addToCart(device)" class="tarck-add-to-cart btn btn-primary btn-sm waves-effect"><i class="zmdi zmdi-plus"></i></a>
+                            <a href="home/cart" class="btn btn-primary btn-sm waves-effect"><i class="zmdi zmdi-shopping-cart"></i></a>
                         </div>
                     </div>
                     <div class="product_details">

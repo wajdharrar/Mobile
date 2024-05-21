@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DeviceService } from '../../services/device.service';
 import { Device } from '../../models/Phone';
 import { GoogleAnalyticsService } from '../../services/google-analytics.service';
+import { ProviderDeviceService } from '../../services/provider-device.service';
 
 @Component({
   selector: 'app-product-box',
@@ -9,10 +10,12 @@ import { GoogleAnalyticsService } from '../../services/google-analytics.service'
   styleUrl: './product-box.component.css'
 })
 export class ProductBoxComponent implements OnInit{
-  constructor(private deviceService:DeviceService, private googleAnalyticService:GoogleAnalyticsService){}
+  constructor(private deviceService:DeviceService, 
+    private providerDeviceService:ProviderDeviceService,
+    private googleAnalyticService:GoogleAnalyticsService){}
   allDevices:Device[]
   ngOnInit(): void {
-    this.deviceService.getDevices().subscribe(response=>{
+    this.providerDeviceService.getHomeDevices().subscribe(response=>{
       console.log(response);
       this.allDevices=response
     })

@@ -16,6 +16,18 @@ export class DeviceService {
   getDevice(id:number):Observable<any>{
     return this.http.get<any>(`${this.apiServerUrl}/${id}`);
   }
+  countDevicesByState(id:number):Observable<any>{
+    return this.http.get<any>(`${this.apiServerUrl}/count/state/${id}`);
+  }
+  countDevicesByBrand(id:number): Observable<any> {
+    return this.http.get<any>(`${this.apiServerUrl}/count/brand/${id}`);
+  }
+  countDevicesByDeviceType(id:number): Observable<any> {
+    return this.http.get<any>(`${this.apiServerUrl}/count/device/${id}`);
+  }
+  countDevicesByModel(id:number): Observable<any> {
+    return this.http.get<any>(`${this.apiServerUrl}/count/model/${id}`);
+  }
   getDeviceByDeviceType(deviceType:DeviceType):Observable<any[]>{
     return this.http.post<any[]>(`${this.apiServerUrl}/device`,deviceType);
   }

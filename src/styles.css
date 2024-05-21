@@ -1277,15 +1277,14 @@ nav {
   }
 }
 .containerNav{
-  margin-left: 5%;
-  width: 80%;
+  padding-left: 5%;
+  width: 100%;
   display: flex;
-  column-gap: 50%;
+  column-gap: 60%;
+  color: white;
 }
-.nav-links{
-  display: flex;
-  justify-content: space-between;
-}
+
+
 /**********************************footer*******************************************/
 .deneb_footer .widget_wrapper {
   background-image: -moz-linear-gradient(0deg, #5543ca 0%, #9400fe 100%);

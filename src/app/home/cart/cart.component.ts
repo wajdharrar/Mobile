@@ -156,53 +156,63 @@ export class CartComponent implements OnInit{
 
     forkJoin(requests).subscribe((responses: Device[]) => {
       this.devices = responses;
+      console.log (this.devices,'devices')
       this.devices.forEach(device => {
         total += device.price;
       });
       this.total = total;
     });
   }
-  AddRequest(){
-    this.trackClickAddRequest()
+  AddRequest() {
+    this.trackClickAddRequest();
     const today: Date = new Date();
-    console.log(today)
-    this.authService.getUserDetails().subscribe(response=>{
-      this.user=response
-      this.request.date=today.toISOString().substring(0, 10);
-      this.request.initialPayment=this.total*0.1
-      this.request.repayement=this.total-(this.total*0.1)
-      this.request.user=response
-      this.request.state=State.Pending_Validation
-      if(response.role.idRole!=3){
+    console.log(today);
+    this.authService.getUserDetails().subscribe(response => {
+      this.user = response;
+      this.request.date = today.toISOString().substring(0, 10);
+      this.request.initialPayment = this.total * 0.1;
+      this.request.repayement = this.total - (this.total * 0.1);
+      this.request.user = response;
+      this.request.state = State.Pending_Validation;
+  
+      if (response.role.idRole != 3) {
         this.route.navigate(['/login']);
         Swal.fire('Error!', 'You Have To Login First.', 'error');
-      }else{
-        if(this.itmsAdded!=null){
-        this.requestService.addRequests(this.request).subscribe(response=>{
-          this.idRequest=response.idRequest
-          for (let index = 0; index < this.devices.length; index++) {
-            const element = this.devices[index];
-            this.cart.device.idDevice=element.idDevice
-            this.cart.request=response
-            this.cart.itemNumber=element.number
-            this.cartItems.push(this.cart)
-          }
-          console.log(response)
-          console.log(this.cartItems,'items')
-          this.cartService.addToCart(this.cartItems).subscribe(response=>{
-            console.log(response)
-            this.cancel()
-            this.route.navigate(['home/document',this.idRequest]);
-          })
-        })}
-        else{
-          Swal.fire('Error!', 'Your request was added.', 'error');
+      } else {
+        if (this.itmsAdded.length > 0) {
+          this.requestService.addRequests(this.request).subscribe(response => {
+            this.idRequest = response.idRequest;
+            for (let index = 0; index < this.devices.length; index++) {
+              const device = this.devices[index];
+              let cartItem: Cart = {
+                idCart: 0,
+                total: device.price,
+                itemNumber: device.number,
+                request: response,
+                device: {
+                  ...device,
+                  number: device.number // Assuming number is quantity here
+                }
+              };
+              this.cartItems.push(cartItem);
+            }
+            console.log(response);
+            console.log(this.cartItems, 'items');
+            this.cartService.addToCart(this.cartItems).subscribe(response => {
+              console.log(response, 'response');
+              this.cancel();
+              this.route.navigate(['home/document', this.idRequest]);
+            });
+          });
+        } else {
+          Swal.fire('Error!', 'Your cart is empty.', 'error');
         }
       }
-    },error=>{
+    }, error => {
       Swal.fire('Error!', 'You Have To Login First.', 'error');
-    })
+    });
   }
+  
   cancel() {
     for (let index = 0; index < this.itmsAdded.length; index++) {
       const element = this.itmsAdded[index];

@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 import { User } from '../../models/User';
 import { Request } from '../../models/Request';
 import { AuthService } from '../../services/auth.service';
@@ -14,7 +13,7 @@ import Swal from 'sweetalert2';
 export class MyRequestsComponent {
   requests!:Request[];
   user!:User;
-  constructor(private serviceRequest:RequestService,private authService:AuthService,private route :Router){}
+  constructor(private serviceRequest:RequestService,private authService:AuthService){}
   ngOnInit(): void {
     this.authService.getUserDetails().subscribe(response=>{
       this.user=response

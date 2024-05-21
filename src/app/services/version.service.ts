@@ -17,6 +17,9 @@ export class VersionService {
   getPartnerIds(id:number): Observable<number> {
     return this.http.get<number>(`${this.apiServerUrl}/idPartners/${id}`);
   }
+  countVersionsByState(id:number): Observable<any> {
+    return this.http.get<any>(`${this.apiServerUrl}/count/state/${id}`);
+  }
   getVersionsByPartner(idPartner:number): Observable<Version[]> {
     return this.http.get<Version[]>(`${this.apiServerUrl}/all/${idPartner}`);
   }

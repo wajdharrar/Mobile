@@ -24,6 +24,30 @@ export class RequestService {
   getTotal(): Observable<number> {
     return this.http.get<number>(`${this.apiServerUrl}/total`);
   }
+  countRequestForPartner(id:number): Observable<number> {
+    return this.http.get<number>(`${this.apiServerUrl}/total/partner/${id}`);
+  }
+  countRequestsTotalForPartner(id:number): Observable<number> {
+    return this.http.get<number>(`${this.apiServerUrl}/total/requests/${id}`);
+  }
+  countRequestsByBrandForPartner(id:number): Observable<any> {
+    return this.http.get<any>(`${this.apiServerUrl}/brand/partner/${id}`);
+  }
+  countRequestsByDeviceForPartner(id:number): Observable<any> {
+    return this.http.get<any>(`${this.apiServerUrl}/device/partner/${id}`);
+  }
+  countRequestsByModelForPartner(id:number): Observable<any> {
+    return this.http.get<any>(`${this.apiServerUrl}/model/partner/${id}`);
+  }
+  countRequestsByVersionForPartner(id:number): Observable<any> {
+    return this.http.get<any>(`${this.apiServerUrl}/version/partner/${id}`);
+  }
+  countRequestsByStateForUser(id:number): Observable<any> {
+    return this.http.get<any>(`${this.apiServerUrl}/state/client/${id}`);
+  }
+  countRequestsByDeviceTypeForPartner(id:number): Observable<any> {
+    return this.http.get<any>(`${this.apiServerUrl}/devicetype/partner/${id}`);
+  }
   getCount(): Observable<number> {
     return this.http.get<number>(`${this.apiServerUrl}/count`);
   }
@@ -55,6 +79,8 @@ export class RequestService {
     return this.http.put<Request>(`${this.apiServerUrl}/update/${request.idRequest}`,request)
   }
   updateRequestState(request:Request):Observable<Request>{
+    console.log(request)
+    console.log(request.idRequest)
     return this.http.put<Request>(`${this.apiServerUrl}/updatestate/${request.idRequest}`,request)
   }
 }
